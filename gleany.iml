@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="scala" name="Scala">
+      <configuration>
+        <option name="compilerLibraryLevel" value="Global" />
+        <option name="compilerLibraryName" value="scala-compiler" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/gleany">
+      <sourceFolder url="file://$MODULE_DIR$/gleany/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="scala-library" level="application" />
+    <orderEntry type="library" name="gdx" level="project" />
+    <orderEntry type="library" name="gdx-backend-lwjgl" level="project" />
+    <orderEntry type="library" name="gdx-backend-lwjgl-natives" level="project" />
+    <orderEntry type="library" name="gdx-controllers" level="project" />
+    <orderEntry type="library" name="gdx-controllers-desktop" level="project" />
+    <orderEntry type="library" name="gdx-controllers-desktop-natives" level="project" />
+    <orderEntry type="library" name="gdx-controllers-desktop-sources" level="project" />
+    <orderEntry type="library" name="gdx-freetype" level="project" />
+    <orderEntry type="library" name="gdx-freetype-natives" level="project" />
+    <orderEntry type="library" name="gdx-freetype-sources" level="project" />
+    <orderEntry type="library" name="gdx-natives" level="project" />
+    <orderEntry type="library" name="gdx-sources" level="project" />
+  </component>
+</module>
+

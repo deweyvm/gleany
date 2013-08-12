@@ -5,7 +5,7 @@ object GleanyMath {
         import n.{lt,gt}
         if (lt(value, min)) {
             min
-        } else if (gt(value,max)) {
+        } else if (gt(value, max)) {
             max
         } else {
             value

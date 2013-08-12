@@ -1,6 +1,5 @@
 package com.explatcreations.gleany.data
 
-import com.badlogic.gdx.math.MathUtils
 import com.explatcreations.gleany.GleanyMath
 
 object Point2f {

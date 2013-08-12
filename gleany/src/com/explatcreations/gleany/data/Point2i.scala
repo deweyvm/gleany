@@ -1,6 +1,5 @@
 package com.explatcreations.gleany.data
 
-import com.explatcreations.gleany.data.Point2f
 
 
 object Point2i {

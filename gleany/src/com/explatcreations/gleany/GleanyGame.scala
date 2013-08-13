@@ -13,12 +13,18 @@ object GleanyGame {
     }
 }
 
-class GleanyGame extends ApplicationListener {
+abstract class GleanyGame extends ApplicationListener {
+
+    def update()
+    def draw()
 
     override def create() {
         Gdx.app.setLogLevel(Application.LOG_NONE)
     }
-    override def render() { }
+    override def render() {
+        update()
+        draw()
+    }
     override def dispose() { }
     override def pause() { }
     override def resume() { }

@@ -17,19 +17,22 @@ object LoadUtils {
     }
 
     def load[T](cl:Class[_], name:String, makeNew:() => T, verify:T => T):T = {
-        var result: Option[T] = None
-        try {
-            ensureDirectory(Directory)
-            val path: String = Directory + "/" + name
-            result = Some(json.fromJson(cl, loadFile(path)).asInstanceOf[T])
-        }
-        catch {
-            case e: Exception => {
-                result = Some(makeNew())
-                flush(result, name)
+        def tryLoad() = {
+            try {
+                ensureDirectory(Directory)
+                val path: String = Directory + "/" + name
+                json.fromJson(cl, loadFile(path)).asInstanceOf[T]
+            }
+            catch {
+                case e: Throwable => {
+                    Debug.error(e.getMessage)
+                    val result = makeNew()
+                    flush(result, name)
+                    result
+                }
             }
         }
-        verify(result.get/*fixme*/)
+        verify(tryLoad())
     }
 
     def flush[T](thing:T, name:String) {

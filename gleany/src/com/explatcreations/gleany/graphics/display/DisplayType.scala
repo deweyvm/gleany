@@ -17,7 +17,7 @@ object Display {
     case object Windowed extends DisplayType(0)
     case object Fullscreen extends DisplayType(1)
     case object WindowedFullscreen extends DisplayType(2)
-    //fixme -- consolidate where defaultWindowSize comes from
+
     def setDisplayMode(mode:DisplayType, defaultWindowSize:Point2i) {
         mode match {
             case Fullscreen =>

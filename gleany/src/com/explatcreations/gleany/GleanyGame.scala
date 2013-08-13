@@ -2,6 +2,11 @@ package com.explatcreations.gleany
 
 import com.badlogic.gdx.{Application, Gdx, ApplicationListener}
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
+import com.explatcreations.gleany.graphics.{Color, RectSprite, Renderer}
+
+object Singletons {
+    val renderer = new Renderer
+}
 
 object GleanyGame {
     def exit() {
@@ -24,6 +29,11 @@ abstract class GleanyGame extends ApplicationListener {
     override def render() {
         update()
         draw()
+        Singletons.renderer.drawBatch(() => {
+            new RectSprite(10,10,Color.Blue).draw(0,0)
+            ()
+        }
+        )
     }
     override def dispose() { }
     override def pause() { }

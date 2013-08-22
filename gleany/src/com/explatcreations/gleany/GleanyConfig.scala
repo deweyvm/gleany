@@ -2,10 +2,10 @@ package com.explatcreations.gleany
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import com.explatcreations.gleany.graphics.display.Display
-import com.explatcreations.gleany.loading.VideoSettings
+import com.explatcreations.gleany.loading.{AudioSettings, VideoSettings}
 
 
-case class GleanyConfig(videoSettings:VideoSettings, title:String = "GleanyGame") {
+case class GleanyConfig(settings:VideoSettings with AudioSettings, title:String = "GleanyGame") {
     def toLwjgl:LwjglApplicationConfiguration = lwjglConfig
 
     private val lwjglConfig = {
@@ -15,7 +15,7 @@ case class GleanyConfig(videoSettings:VideoSettings, title:String = "GleanyGame"
         config.useCPUSynch = true
         config.useGL20 = true
         val desktopSize = java.awt.Toolkit.getDefaultToolkit.getScreenSize
-        videoSettings.getDisplayType match {
+        settings.getDisplayType match {
             case Display.Fullscreen =>
                 config.width = desktopSize.width
                 config.height = desktopSize.height
@@ -27,7 +27,7 @@ case class GleanyConfig(videoSettings:VideoSettings, title:String = "GleanyGame"
                 System.setProperty("org.lwjgl.opengl.Window.undecorated","true")
                 config.fullscreen = false
             case Display.Windowed =>
-                val size = videoSettings.getWindowSize
+                val size = settings.getWindowSize
                 config.width = size.x
                 config.height = size.y
                 config.fullscreen = false

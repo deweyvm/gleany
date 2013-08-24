@@ -22,8 +22,7 @@ object LoadUtils {
                 ensureDirectory(Directory)
                 val path: String = Directory + "/" + name
                 json.fromJson(cl, loadFile(path)).asInstanceOf[T]
-            }
-            catch {
+            } catch {
                 case e: Throwable => {
                     Debug.error(e.getMessage)
                     val result = makeNew()
@@ -45,8 +44,7 @@ object LoadUtils {
             val writer: PrintWriter = new PrintWriter(path)
             writer.print(json.prettyPrint(thing))
             writer.close()
-        }
-        catch {
+        } catch {
             case e: Exception => {
                 Debug.error(e.getMessage)
             }
@@ -57,8 +55,7 @@ object LoadUtils {
         val file: File = new File(path)
         if (file.exists && !file.isDirectory) {
             throw new RuntimeException(String.format("Expected file '%s' to be a directory. If it is safe to do so, rename that file or delete it and try again.", path))
-        }
-        else if (!file.exists && !file.mkdir) {
+        } else if (!file.exists && !file.mkdir) {
             throw new RuntimeException(String.format("Failed to create directory '%s' because <unknown>.", path))
         }
     }

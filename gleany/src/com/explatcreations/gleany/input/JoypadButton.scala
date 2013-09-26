@@ -1,8 +1,8 @@
 package com.explatcreations.gleany.input
 
-trait ButtonInfo
-case class AxisButton(code:Int, value:Int) extends ButtonInfo
-case class FaceButton(code:Int) extends ButtonInfo
+trait ButtonSpec
+case class AxisButton(code:Int, value:Int) extends ButtonSpec
+case class FaceButton(code:Int) extends ButtonSpec
 
 object JoypadButton {
     def fromString(string:String):JoypadButton = new JoypadButton(string, Map(string))
@@ -28,6 +28,6 @@ object JoypadButton {
     val All = Map map {case (name, info) => new JoypadButton(name, info)}
 }
 
-case class JoypadButton(descriptor:String, info:ButtonInfo) {
+case class JoypadButton(descriptor:String, info:ButtonSpec) {
     override def toString:String = descriptor
 }

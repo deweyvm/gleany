@@ -61,7 +61,10 @@ class HardwareInfo {
         if (os == OS.Windows) {
             System.getenv("PROCESSOR_IDENTIFIER")
         } else {
-            getOutput("/bin/bash", "-c", "cat /proc/cpuinfo | grep 'model name' | sed 's/model name\\s*:[ ]*//g' | head -n 1")
+            val lines = Gdx.files.absolute("/proc/cpuinfo").readString().split("\n")
+            lines.find(_.contains("model name")) map {
+                _.replaceAll("model name\\s*:[ ]*", "")
+            } getOrElse "Error"
         }
     }
 
@@ -69,7 +72,8 @@ class HardwareInfo {
         if (os eq OS.Windows) {
             System.getenv("NUMBER_OF_PROCESSORS")
         } else {
-            getOutput("/bin/bash", "-c", "cat /proc/cpuinfo | grep 'processor' | wc -l")
+            val lines = Gdx.files.absolute("/proc/cpuinfo").readString().split("\n")
+            lines.filter(_.contains("processor")).length.toString
         }
     }
 

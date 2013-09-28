@@ -1,0 +1,3 @@
+[submodule "gleany/libs"]
+	path = gleany/libs
+	url = https://github.com/deweyvm/gleany-lib.git

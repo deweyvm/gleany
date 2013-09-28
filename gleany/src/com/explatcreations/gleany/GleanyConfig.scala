@@ -2,7 +2,7 @@ package com.explatcreations.gleany
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import com.explatcreations.gleany.graphics.display.Display
-import com.explatcreations.gleany.loading.{AudioSettings, VideoSettings}
+import com.explatcreations.gleany.saving.{AudioSettings, VideoSettings}
 
 
 case class GleanyConfig(settings:VideoSettings with AudioSettings, title:String = "GleanyGame") {

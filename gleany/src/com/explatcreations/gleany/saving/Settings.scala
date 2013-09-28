@@ -1,6 +1,6 @@
-package com.explatcreations.gleany.loading
+package com.explatcreations.gleany.saving
 
-import com.explatcreations.gleany.loading._
+import com.explatcreations.gleany.saving._
 import com.explatcreations.gleany.Debug
 import com.explatcreations.gleany.input.JoypadButton
 import com.explatcreations.gleany.data.Point2i

@@ -2,7 +2,7 @@ package com.explatcreations.gleany.audio
 
 import collection.mutable.ArrayBuffer
 import com.explatcreations.gleany.Debug
-import com.explatcreations.gleany.loading.AudioSettings
+import com.explatcreations.gleany.saving.AudioSettings
 
 class ActiveAudioCollection {
     private var playing = ArrayBuffer[AudioInstance]()

@@ -40,7 +40,6 @@ class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
     val cols = worldWidth/GridScale
     val rows = worldHeight/GridScale
 
-
     val MaxSize = params.MaxParticles
     val MaxNeighbors = params.MaxNeighbors
     val VelocityCap = params.MaxVelocity

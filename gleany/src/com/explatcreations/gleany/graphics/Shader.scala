@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Matrix4
 import com.explatcreations.gleany.Debug
 
 object Shader {
-    private val Root = "shaders/"
+    private val Root = "data/shaders/"
 }
 
 class Shader(vert:String, frag:String) {

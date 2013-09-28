@@ -1,4 +1,4 @@
-/*
+/******************************************************************************
  * Copyright 2013, deweyvm
  *
  * This file is part of Gleany.
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Gleany.
  * If not, see <http://www.gnu.org/licenses/>.
- */
+ *****************************************************************************/
 
 package com.explatcreations.gleany.graphics.display
 

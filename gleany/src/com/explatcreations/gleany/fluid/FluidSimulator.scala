@@ -1,4 +1,4 @@
-/*
+/******************************************************************************
  * Copyright 2013, deweyvm
  *
  * This file is part of Gleany.
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Gleany.
  * If not, see <http://www.gnu.org/licenses/>.
- */
+ *****************************************************************************/
 
 package com.explatcreations.gleany.fluid
 
@@ -28,10 +28,11 @@ import com.badlogic.gdx.math.MathUtils
  * Based on "Particle-based Viscoelastic Fluid Simulation"
  * by Simon Clavet, Philippe Beaudoin, Pierre Poul
  *
- * Code heavily based on Simone Autore's lovely java implementation available at
+ * Code based on Simone Autore's lovely java implementation available at
  * https://github.com/omgware/fluid-simulator
  * @author deweyvm
  */
+
 class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
     val GridScale = 4
     val BufferX = -10
@@ -60,7 +61,7 @@ class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
     val RepulseForce = cols / 1f
     val RepulseRange = cols / 2f
 
-    val disposableParticles = ArrayBuffer[Drop]()
+    val deleteQueue = ArrayBuffer[Drop]()
     val particles = makeParticles
 
     private def makeParticles = {
@@ -305,7 +306,7 @@ class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
             if (Gdx.input.isTouched(1)) {
                 for (pi <- particles) {
                     if (dstToMouse(pi) < AttractRange) {
-                        //disposableParticles.add(pi)
+                        //deleteQueue.add(pi)
                     }
                 }
             }

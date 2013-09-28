@@ -2,10 +2,13 @@ package com.explatcreations.gleany
 
 import com.badlogic.gdx.{Application, Gdx, ApplicationListener}
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
+import com.explatcreations.gleany.loading.{VideoSettings, AudioSettings}
 
 object Gleany {
 
 }
+
+class Gleany(settings:AudioSettings with VideoSettings)
 
 object GleanyGame {
     def exit() {

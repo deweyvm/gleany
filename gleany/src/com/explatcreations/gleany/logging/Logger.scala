@@ -1,4 +1,4 @@
-package com.explatcreations.gleany
+package com.explatcreations.gleany.logging
 
 import java.lang.String
 import scala.Predef.String

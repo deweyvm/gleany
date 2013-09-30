@@ -27,3 +27,10 @@ class GleanyTiledMap(name:String) {
     val element = xml.parse(Gdx.files.internal(name))
 
 }
+
+case class MapObject(`type`:String, properties:Map[String,String])
+
+trait ITiledMap {
+    def getProperty(name:String):String
+
+}

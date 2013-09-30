@@ -67,6 +67,7 @@ abstract class GleanyGame(initializer:GleanyInitializer) extends ApplicationList
         update()
         draw()
     }
+
     override def dispose() { }
     override def pause() { }
     override def resume() { }

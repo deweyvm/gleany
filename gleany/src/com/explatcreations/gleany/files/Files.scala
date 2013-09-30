@@ -35,16 +35,15 @@ class Files(resolver:PathResolver) {
 
 
     private def findSound(name:String, root:String):FileHandle = {
-        val pathList = List("ogg", "wav") map {
-            ext =>
-                val path = root + "/" + name + "." + ext
-                if (exists(path)) {
-                    Some(path)
-                } else {
-                    None
-                }
+        val pathList = List("ogg", "wav") map { ext =>
+            val path = root + "/" + name + "." + ext
+            if (exists(path)) {
+                Some(path)
+            } else {
+                None
+            }
         }
-        (pathList.flatten map {path => getFile(path)}).headOption.getOrElse(throwFileNotFound(name))
+        pathList.flatten.map(getFile).headOption.getOrElse(throwFileNotFound(name))
     }
 
     def music(name:String) = {

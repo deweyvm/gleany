@@ -51,7 +51,6 @@ object GleanyGame {
 abstract class GleanyGame(initializer:GleanyInitializer) extends ApplicationListener {
 
     def gleanyUpdate() {
-
         Glean.y.audio.update()
     }
 

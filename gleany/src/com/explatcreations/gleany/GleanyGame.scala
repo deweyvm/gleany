@@ -22,13 +22,15 @@ package com.explatcreations.gleany
 import com.badlogic.gdx.{Application, Gdx, ApplicationListener}
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.explatcreations.gleany.saving.{VideoSettings, AudioSettings}
+import com.explatcreations.gleany.files.{PathResolver, Files}
 
 object Glean {
     var y:Gleany = null
 }
 
-class Gleany(val settings:AudioSettings with VideoSettings) {
+class Gleany(resolver:PathResolver/*, settings:AudioSettings with VideoSettings*/) {
     //val audio = new AudioManager(settings)
+    val files = new Files(resolver)
 }
 
 object GleanyGame {
@@ -44,14 +46,14 @@ object GleanyGame {
     }
 }
 
-abstract class GleanyGame/*(initializer:GleanyInitializer)*/ extends ApplicationListener {
+abstract class GleanyGame(initializer:GleanyInitializer) extends ApplicationListener {
 
     def update()
     def draw()
 
     override def create() {
         Gdx.app.setLogLevel(Application.LOG_NONE)
-        //Glean.y = new Gleany//initializer.create
+        Glean.y = new Gleany(initializer.pathResolver)
     }
 
     override def render() {

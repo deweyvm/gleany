@@ -20,13 +20,37 @@
 package com.explatcreations.gleany.saving
 
 import com.badlogic.gdx.utils.Json
-import java.io.{PrintWriter, File}
+import java.io.{UnsupportedEncodingException, PrintWriter, File}
 import java.util.Scanner
-import com.explatcreations.gleany.Debug
+import com.explatcreations.gleany.{Gleany, Debug}
+import scala.Predef.String
+import java.net.URLDecoder
+import scala.RuntimeException
 
 object LoadUtils {
-    final val Directory: String = System.getProperty("user.home") + "/.Mission"
-    final val json: Json = new Json
+    private def getJarPath: String = {
+        if (true/*fixme Glean.y.globals.IsDebugMode*/) {
+            return "."
+        }
+        def getPath = {
+            val path = Predef.classOf[Gleany].getProtectionDomain.getCodeSource.getLocation.getPath
+            if (!new File(path).isDirectory) {
+                System.getProperty("user.dir")
+            } else {
+                path
+            }
+        }
+        try {
+            URLDecoder.decode(getPath, "UTF-8")
+        } catch {
+            case uee: UnsupportedEncodingException => {
+                throw new RuntimeException(uee)
+            }
+        }
+    }
+
+    val Directory: String = getJarPath
+    val json: Json = new Json
 
     def loadFile(path: String): String = {
         val file: File = new File(path)

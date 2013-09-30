@@ -19,7 +19,6 @@
 
 package com.explatcreations.gleany.saving
 
-import com.explatcreations.gleany.saving._
 import com.explatcreations.gleany.Debug
 import com.explatcreations.gleany.input.JoypadButton
 import com.explatcreations.gleany.data.Point2i
@@ -33,7 +32,7 @@ class Settings(controls:ControlNameCollection[ControlName], defaults:SettingDefa
     Debug.load()
     val controlListeners = ArrayBuffer[()=>Unit]()
     val utils = new SettingUtils(controls, defaults)
-    val filename = "Mission.settings"
+    val filename = "settings.json"
     val raw:RawSettings = LoadUtils.load(classOf[RawSettings], filename, () => utils.makeNew, utils.verify)
 
     override def getDisplayType = DisplayType.fromInt(raw.displayType)

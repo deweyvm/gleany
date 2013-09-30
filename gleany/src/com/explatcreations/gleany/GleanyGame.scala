@@ -23,8 +23,8 @@ import com.badlogic.gdx.{Application, Gdx, ApplicationListener}
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.explatcreations.gleany.saving.{VideoSettings, AudioSettings}
 
-object Gleany {
-    //var gleany:Gleany = null
+object Glean {
+    var y:Gleany = null
 }
 
 class Gleany(val settings:AudioSettings with VideoSettings) {
@@ -51,7 +51,7 @@ abstract class GleanyGame/*(initializer:GleanyInitializer)*/ extends Application
 
     override def create() {
         Gdx.app.setLogLevel(Application.LOG_NONE)
-        //Gleany.gleany = initializer.create
+        //Glean.y = new Gleany//initializer.create
     }
 
     override def render() {

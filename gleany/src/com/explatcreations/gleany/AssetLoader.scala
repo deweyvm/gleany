@@ -24,17 +24,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.Gdx
 import com.explatcreations.gleany.data.Recti
+import com.explatcreations.gleany.audio.{Music, Sfx}
 
 object AssetLoader {
 
-    val TexturePath = "sprites"
-    val FontPath = "fonts"
     val SoundPath = "sfx"
     val MusicPath = "music"
 
     def loadTexture(name:String) = {
-        val path = TexturePath + "/" + name + ".png"
-        new Texture(path)
+        new Texture(Glean.y.files.texture(name))
     }
 
     def makeTextureRegion(texture:Texture, recti:Option[Recti]=None) = {
@@ -45,11 +43,12 @@ object AssetLoader {
         result
     }
 
-
     def loadFont(name:String, pt:Int) = {
-        val gen = new FreeTypeFontGenerator(Gdx.files.internal(FontPath + "/" + name))
+        val gen = new FreeTypeFontGenerator(Glean.y.files.font(name))
         val font = gen.generateFont(pt, FreeTypeFontGenerator.DEFAULT_CHARS, true)
         gen.dispose()
         font
     }
+
+
 }

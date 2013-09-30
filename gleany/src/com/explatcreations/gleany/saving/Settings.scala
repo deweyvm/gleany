@@ -36,26 +36,26 @@ class Settings(controls:ControlNameCollection[ControlName], defaults:SettingDefa
     val raw:RawSettings = LoadUtils.load(classOf[RawSettings], filename, () => utils.makeNew, utils.verify)
 
     override def getDisplayType = DisplayType.fromInt(raw.displayType)
-    def setDisplayType(`type`:DisplayType) {
+    override def setDisplayType(`type`:DisplayType) {
         raw.displayType = `type`.toInt
         flush()
     }
 
     override def getWindowSize = Point2i(raw.width.toInt, raw.height.toInt)
-    def setWindowSize(width:Int, height:Int) {
+    override def setWindowSize(width:Int, height:Int) {
         raw.width = width
         raw.height = height
         flush()
     }
 
     override def getSfxVolume = raw.sfxVolume
-    def setSfxVolume(value:Float) {
+    override def setSfxVolume(value:Float) {
         raw.sfxVolume = value
         flush()
     }
 
     override def getMusicVolume = raw.musicVolume
-    def setMusicVolume(value:Float) {
+    override def setMusicVolume(value:Float) {
         raw.musicVolume = value
         flush()
     }

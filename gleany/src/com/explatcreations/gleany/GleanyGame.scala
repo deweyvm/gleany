@@ -24,6 +24,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.explatcreations.gleany.saving.{Settings, VideoSettings, AudioSettings}
 import com.explatcreations.gleany.files.{PathResolver, Files}
 import com.explatcreations.gleany.audio.AudioManager
+import com.explatcreations.gleany.loading.GleanyTiledMap
 
 object Glean {
     var y:Gleany = null
@@ -60,6 +61,8 @@ abstract class GleanyGame(initializer:GleanyInitializer) extends ApplicationList
     override def create() {
         Gdx.app.setLogLevel(Application.LOG_NONE)
         Glean.y = new Gleany(initializer.pathResolver, initializer.settings)
+
+        new GleanyTiledMap("room+000+000.tmx")
     }
 
     override def render() {

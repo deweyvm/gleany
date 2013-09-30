@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.files.FileHandle
 
 class Files(resolver:PathResolver) {
-
     private def throwFileNotFound(path:String):Nothing = {
         throw new RuntimeException("failed to find file \"" + path + "\"")
     }
@@ -21,7 +20,11 @@ class Files(resolver:PathResolver) {
         file
     }
 
-    def shader(name:String):FileHandle = {
+    def map(name:String) = {
+        getFile(resolver.MapPath + "/" + name)
+    }
+
+    def shader(name:String) = {
         getFile(resolver.ShaderPath + "/" + name)
     }
 

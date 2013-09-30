@@ -28,9 +28,6 @@ import com.explatcreations.gleany.audio.{Music, Sfx}
 
 object AssetLoader {
 
-    val SoundPath = "sfx"
-    val MusicPath = "music"
-
     def loadTexture(name:String) = {
         new Texture(Glean.y.files.texture(name))
     }
@@ -50,5 +47,17 @@ object AssetLoader {
         font
     }
 
+    /**
+     * todo: could we automatically detect the extension?
+     */
+    def loadSound(name:String, looped:Boolean) = {
+        val sound = Gdx.audio.newMusic(Glean.y.files.sfx(name))
+        new Sfx(Glean.y.audio, sound, looped)
+    }
+
+    def loadMusic(name:String) = {
+        val music = Gdx.audio.newMusic(Glean.y.files.music(name))
+        new Music(Glean.y.audio, music)
+    }
 
 }

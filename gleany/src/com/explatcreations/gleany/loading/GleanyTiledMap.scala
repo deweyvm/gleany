@@ -23,48 +23,52 @@ package com.explatcreations.gleany.loading
 
 import com.badlogic.gdx.utils.XmlReader
 import com.explatcreations.gleany.Glean
+import scala.collection.immutable.IndexedSeq
 
 class GleanyTiledMap(name:String) {
     val xml = new XmlReader()
     val root = xml.parse(Glean.y.files.map(name))
-    val gidMap = {
-        root.getChildByName("tileset")
-    }
-    for (i <- 0 until root.getChildCount) {
-        val element = root.getChild(i)
-        if (element.getName == "properties") {
-            val pairs = 0 until element.getChildCount map { j:Int =>
-                val prop = element.getChild(j)
-                val key = prop.get("name")
-                val value = prop.get("value")
-                (key, value)
-            }
-            pairs.toMap
-        } else if (element.getName == "tileset") {
-            val firstGid = element.get("firstgid")
-        } else if (element.getName == "layer") {
-            val name = element.get("name")
-            val width = element.getInt("width")
-            val height = element.getInt("height")
-            println(name + " " + width + " " + height)
-            0 until element.getChildCount map { j:Int =>
-                val child = element.getChild(j)
-                parseCsv(child.getText, width, height)
-            }
+    val gidMap = makeGidMap
+    val layers = makeLayers
+    //val objects = makeObjects
+    val properties = makeProperties
+    def makeGidMap:Map[String, Int] = {
+        val elements = root.getChildrenByName("tileset")
+        val pairs = elements.toArray map { e:XmlReader.Element =>
+            val name = e.get("name")
+            val firstGid = e.getInt("firstgid")
+            (name, firstGid)
         }
+        pairs.toMap
     }
 
-    def parseCsv(data:String, width:Int, height:Int) {
-        println(data)
-        println("vs")
-        val what = data.split("\r\n|\r|\n").map {str => str.replaceAll(",\\s*$", "").split(",\\s*").map(_.toInt)}
-        for (j <- 0 until height) {
-            for (i <- 0 until width) {
-                print(what(j)(i) + ",")
-            }
-            println()
+    def makeLayers:Map[String,Array[Array[Int]]] = {
+        val elements = root.getChildrenByName("layer")
+        val pairs = elements.toArray map { e:XmlReader.Element =>
+            val name = e.get("name")
+            val width = e.getInt("width")
+            val height = e.getInt("height")
+            println(name + " " + width + " " + height)
+            val tiles: Array[Array[Int]] = parseCsv(gidMap(name), e.getChildByName("data").getText, width, height)
+            (name, tiles)
         }
-        println()
+        pairs.toMap
+    }
+
+    def makeProperties = {
+        val propertyElement = root.getChildByName("properties")
+        val pairs = 0 until propertyElement.getChildCount map { j:Int =>
+            val prop = propertyElement.getChild(j)
+            val key = prop.get("name")
+            val value = prop.get("value")
+            (key, value)
+        }
+        pairs.toMap
+    }
+
+    def parseCsv(firstGid:Int, data:String, width:Int, height:Int):Array[Array[Int]] = {
+        val rows = data.split("\r\n|\r|\n")
+        rows.map {str => str.replaceAll(",\\s*$", "").split(",\\s*").map(_.toInt - firstGid)}
     }
 }
 

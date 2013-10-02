@@ -23,14 +23,13 @@ package com.explatcreations.gleany.loading
 
 import com.badlogic.gdx.utils.XmlReader
 import com.explatcreations.gleany.Glean
-import scala.collection.immutable.IndexedSeq
 
-class GleanyTiledMap(name:String) {
+class GleanyTiledMap(mapName:String) {
     val xml = new XmlReader()
-    val root = xml.parse(Glean.y.files.map(name))
+    val root = xml.parse(Glean.y.files.map(mapName))
     val gidMap = makeGidMap
     val layers = makeLayers
-    //val objects = makeObjects
+    val objects = makeObjects
     val properties = makeProperties
     def makeGidMap:Map[String, Int] = {
         val elements = root.getChildrenByName("tileset")
@@ -40,6 +39,33 @@ class GleanyTiledMap(name:String) {
             (name, firstGid)
         }
         pairs.toMap
+    }
+
+    def makeObjects:Map[String, Seq[MapObject]] = {
+        val groupsNodes = root.getChildrenByName("objectgroup")
+        val objectPairs = groupsNodes.toArray map { e:XmlReader.Element =>
+            val name = e.get("name")
+            val objectsNodes = e.getChildrenByName("object")
+            val objects = objectsNodes.toArray map { obj:XmlReader.Element =>
+                val x = obj.getInt("x")
+                val y = obj.getInt("y")
+                val `type` = obj.get("type")
+                //val width = obj.getInt("width")//width ignored
+                //val height = obj.getInt("height")//height ignored
+                val propertiesNode:XmlReader.Element = obj.getChildByName("properties")
+                val propertyNodes = propertiesNode.getChildrenByName("property")
+                val allProperties = (propertyNodes.toArray map { prop:XmlReader.Element =>
+                    val value = prop.get("value")
+                    val name = prop.get("name")
+                    (value, name)
+                }).toMap
+
+                MapObject(`type`, x, y, allProperties)
+            } : Seq[MapObject]
+            (name, objects)
+        }
+        objectPairs.toMap
+
     }
 
     def makeLayers:Map[String,Array[Array[Int]]] = {
@@ -70,13 +96,29 @@ class GleanyTiledMap(name:String) {
         val rows = data.split("\r\n|\r|\n")
         rows.map {str => str.replaceAll(",\\s*$", "").split(",\\s*").map(_.toInt - firstGid)}
     }
+
+    override def toString = {
+        val layerString = (layers map { case (name, tiles) =>
+            "Tile Layer: " + name
+        }).mkString("", "\n", "\n")
+
+        def objToString(obj:MapObject) = {
+            val propertiesString = (obj.properties map { case (key, value) =>
+                "(%s -> %s)".format(key, value)
+            }).mkString(",")
+            "Object <type=%s> <x=%d> <y=%d> <properties=%s>".format(obj.`type`, obj.x, obj.y, propertiesString)
+        }
+        val objectsString = (objects map {case (name, objects) =>
+            "Object Layer: " + name + "\n" +
+                (objects map objToString).mkString("    ", "\n", "")
+        }).mkString("\n")
+        layerString + objectsString
+    }
 }
 
 class IllFormedMapException(message:String) extends RuntimeException
 
-case class MapObject(`type`:String, x:Int, y:Int, width:Int, height:Int, properties:Map[String,String])
-
-
+case class MapObject(`type`:String, x:Int, y:Int, properties:Map[String,String])
 
 trait ITiledMap {
     val width:Int
@@ -84,5 +126,4 @@ trait ITiledMap {
     def getProperty(name:String):String
     def getObjectLayer(name:String):Seq[MapObject]
     def getTileLayer(name:String):Array[Array[Int]]
-
 }

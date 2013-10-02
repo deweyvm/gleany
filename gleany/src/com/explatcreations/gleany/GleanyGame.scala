@@ -63,8 +63,6 @@ abstract class GleanyGame(initializer:GleanyInitializer) extends ApplicationList
     override def create() {
         Gdx.app.setLogLevel(Application.LOG_NONE)
         Glean.y = new Gleany(initializer.pathResolver, initializer.settings)
-
-        println(new GleanyTiledMap("room+000+000.tmx").toString)
     }
 
     override def render() {

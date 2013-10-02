@@ -42,7 +42,7 @@ class Files(resolver:PathResolver) {
     }
 
     def map(name:String) = {
-        getFile(resolver.MapPath + "/" + name)
+        getFile(resolver.MapPath + "/" + name + ".tmx")
     }
 
     def shader(name:String) = {

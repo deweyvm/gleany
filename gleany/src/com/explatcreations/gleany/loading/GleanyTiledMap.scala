@@ -34,13 +34,14 @@ trait ITiledMap {
 
 
 class GleanyTiledMap(mapName:String) extends ITiledMap {
-    type TileData = (Int, Int, Array[Array[Int]])
+    private type TileData = (Int, Int, Array[Array[Int]])
     private val xml = new XmlReader()
     private val root = xml.parse(Glean.y.files.map(mapName))
     private val gidMap = makeGidMap
     private val layers = makeLayers
     private val objects = makeObjects
     private val properties = makeProperties
+
     override val width = getWidth
     override val height = getHeight
 
@@ -82,6 +83,8 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
         pairs.toMap
     }
 
+    //private def parseObject(element:XmlReader.Element)
+
     private def makeObjects:Map[String, Seq[MapObject]] = {
         val groupsNodes = root.getChildrenByName("objectgroup")
         val objectPairs = groupsNodes.toArray map { e:XmlReader.Element =>
@@ -95,13 +98,13 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
                 //val height = obj.getInt("height")//height ignored
                 val propertiesNode:XmlReader.Element = obj.getChildByName("properties")
                 val propertyNodes = propertiesNode.getChildrenByName("property")
-                val allProperties = (propertyNodes.toArray map { prop:XmlReader.Element =>
+                val pairs = propertyNodes.toArray map { prop:XmlReader.Element =>
                     val name = prop.get("name")
                     val value = prop.get("value")
                     (name, value)
-                }).toMap
+                }
 
-                MapObject(`type`, x, y, allProperties)
+                MapObject(`type`, x, y, pairs.toMap)
             } : Seq[MapObject]
             (name, objects)
         }
@@ -134,7 +137,11 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
 
     private def parseCsv(firstGid:Int, data:String, width:Int, height:Int):Array[Array[Int]] = {
         val rows = data.split("\r\n|\r|\n")
-        rows.map {str => str.replaceAll(",\\s*$", "").split(",\\s*").map(_.toInt - firstGid)}
+        rows.map {
+            _.replaceAll(",\\s*$", "")
+             .split(",\\s*")
+             .map(_.toInt - firstGid)
+        }
     }
 
     override def toString = {
@@ -150,7 +157,7 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
         }
         val objectsString = (objects map {case (name, objects) =>
             "Object Layer: " + name + "\n" +
-                (objects map objToString).mkString("    ", "\n", "")
+                (objects map objToString).mkString("    ", "\n    ", "")
         }).mkString("\n")
         layerString + objectsString
     }
@@ -162,6 +169,7 @@ object IllFormedMapException {
         "Failed to load map \"%s\": %s" format (mapName, reason)
     }
 }
+
 class IllFormedMapException(mapName:String, reason:String) extends RuntimeException(IllFormedMapException.getMessage(mapName, reason))
 
 case class MapObject(`type`:String, x:Int, y:Int, properties:Map[String,String])

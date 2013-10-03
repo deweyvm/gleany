@@ -33,7 +33,7 @@ case class GleanyConfig(settings:VideoSettings with AudioSettings, title:String 
         val config = new LwjglApplicationConfiguration
         config.title = title
         config.vSyncEnabled = true
-        config.useCPUSynch = true
+        //config.useCPUSynch = true
         config.useGL20 = true
         val desktopSize = java.awt.Toolkit.getDefaultToolkit.getScreenSize
         settings.getDisplayType match {

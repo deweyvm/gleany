@@ -41,8 +41,14 @@ class Files(resolver:PathResolver) {
         file
     }
 
+    private def getMapPath(name:String) = resolver.MapPath + "/" + name + ".tmx"
+
+    def mapExists(name:String) = {
+        exists(getMapPath(name))
+    }
+
     def map(name:String) = {
-        getFile(resolver.MapPath + "/" + name + ".tmx")
+        getFile(getMapPath(name))
     }
 
     def shader(name:String) = {

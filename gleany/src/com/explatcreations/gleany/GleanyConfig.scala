@@ -24,17 +24,20 @@ package com.explatcreations.gleany
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import com.explatcreations.gleany.graphics.display.Display
 import com.explatcreations.gleany.saving.{AudioSettings, VideoSettings}
+import com.badlogic.gdx.Files
 
 
-case class GleanyConfig(settings:VideoSettings with AudioSettings, title:String = "GleanyGame") {
+case class GleanyConfig(settings:VideoSettings with AudioSettings, title:String = "GleanyGame", iconPath:Option[String]=None) {
     def toLwjgl:LwjglApplicationConfiguration = lwjglConfig
 
     private val lwjglConfig = {
         val config = new LwjglApplicationConfiguration
         config.title = title
         config.vSyncEnabled = true
-        //config.useCPUSynch = true
         config.useGL20 = true
+        iconPath foreach { path =>
+            config.addIcon(path, Files.FileType.Internal)
+        }
         val desktopSize = java.awt.Toolkit.getDefaultToolkit.getScreenSize
         settings.getDisplayType match {
             case Display.Fullscreen =>

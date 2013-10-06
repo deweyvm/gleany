@@ -27,21 +27,21 @@ import scala.collection.mutable.ArrayBuffer
 class SpriteRenderer {
     val batch = new SpriteBatch(5000)
 
-    var draws:ArrayBuffer[() => Unit] = ArrayBuffer[() => Unit]()
+    var draws: ArrayBuffer[() => Unit] = ArrayBuffer[() => Unit]()
 
-    def addCall(call:() => Unit) {
+    def addCall(call: () => Unit) {
         draws += call
     }
 
-    def draw(sprite:Sprite) {
-        addCall (() => sprite.draw(batch))
+    def draw(sprite: Sprite) {
+        addCall(() => sprite.draw(batch))
     }
 
-    /*def draw(fontCache:HackFontCache, start:Int, end:Int) {
+    /*def draw(fontCache: BitmapFontCache, start: Int, end: Int) {
         addCall(() => fontCache.draw(batch, start, end))
     }
 
-    def draw(fontCache:HackFontCache) {
+    def draw(fontCache: BitmapFontCache) {
         addCall(() => fontCache.draw(batch))
     }*/
 }

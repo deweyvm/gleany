@@ -34,13 +34,13 @@ object FluidParams {
                               MaxVelocity = 150f)
 }
 
-case class FluidParams(Timestep:Float,
-                       MaxParticles:Int,
-                       MaxNeighbors:Int,
-                       InteractionRadius:Float,
-                       LinearViscosity:Float,
-                       QuadraticViscosity:Float,
-                       RestDensity:Float,
-                       Stiffness:Float,
-                       NearStiffnessFactor:Float,
-                       MaxVelocity:Float)
+case class FluidParams(Timestep: Float,
+                       MaxParticles: Int,
+                       MaxNeighbors: Int,
+                       InteractionRadius: Float,
+                       LinearViscosity: Float,
+                       QuadraticViscosity: Float,
+                       RestDensity: Float,
+                       Stiffness: Float,
+                       NearStiffnessFactor: Float,
+                       MaxVelocity: Float)

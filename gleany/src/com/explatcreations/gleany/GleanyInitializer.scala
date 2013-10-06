@@ -24,6 +24,4 @@ package com.explatcreations.gleany
 import com.explatcreations.gleany.files.PathResolver
 import com.explatcreations.gleany.saving.Settings
 
-class GleanyInitializer(val pathResolver:PathResolver, val settings:Settings) {
-
-}
+class GleanyInitializer(val pathResolver: PathResolver, val settings: Settings)

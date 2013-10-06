@@ -28,48 +28,48 @@ import com.explatcreations.gleany.graphics.display.DisplayType
 import scala.collection.mutable.ArrayBuffer
 
 
-class Settings(controls:ControlNameCollection[ControlName], defaults:SettingDefaults) extends VideoSettings with AudioSettings {
+class Settings(controls: ControlNameCollection[ControlName], defaults: SettingDefaults) extends VideoSettings with AudioSettings {
     import SettingUtils.scalaMapToJava
 
     Debug.load()
     val controlListeners = ArrayBuffer[()=>Unit]()
     val utils = new SettingUtils(controls, defaults)
     val filename = "settings.json"
-    val raw:RawSettings = LoadUtils.load(classOf[RawSettings], filename, () => utils.makeNew, utils.verify)
+    val raw: RawSettings = LoadUtils.load(classOf[RawSettings], filename, () => utils.makeNew, utils.verify)
 
     override def getDisplayType = DisplayType.fromInt(raw.displayType)
-    override def setDisplayType(`type`:DisplayType) {
+    override def setDisplayType(`type`: DisplayType) {
         raw.displayType = `type`.toInt
         flush()
     }
 
     override def getWindowSize = Point2i(raw.width.toInt, raw.height.toInt)
-    override def setWindowSize(width:Int, height:Int) {
+    override def setWindowSize(width: Int, height: Int) {
         raw.width = width
         raw.height = height
         flush()
     }
 
     override def getSfxVolume = raw.sfxVolume
-    override def setSfxVolume(value:Float) {
+    override def setSfxVolume(value: Float) {
         raw.sfxVolume = value
         flush()
     }
 
     override def getMusicVolume = raw.musicVolume
-    override def setMusicVolume(value:Float) {
+    override def setMusicVolume(value: Float) {
         raw.musicVolume = value
         flush()
     }
 
-    def getKey(control:ControlName) = raw.keyboardControls.get(control.name).toInt
-    def setKey(control:ControlName, key:Int) {
+    def getKey(control: ControlName) = raw.keyboardControls.get(control.name).toInt
+    def setKey(control: ControlName, key: Int) {
         raw.keyboardControls.put(control.name, key)
         flush()
     }
 
-    def getJoyButton(control:ControlName) = JoypadButton.fromString(raw.joypadControls.get(control.name))//fixme error handling
-    def setJoyButton(control:ControlName, button:JoypadButton) {
+    def getJoyButton(control: ControlName) = JoypadButton.fromString(raw.joypadControls.get(control.name))//fixme error handling
+    def setJoyButton(control: ControlName, button: JoypadButton) {
         raw.joypadControls.put(control.name, button.toString)
         flush()
     }

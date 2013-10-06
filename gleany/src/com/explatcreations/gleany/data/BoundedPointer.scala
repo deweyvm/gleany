@@ -23,7 +23,7 @@ package com.explatcreations.gleany.data
 
 import com.badlogic.gdx.math.MathUtils
 
-class BoundedPointer(max:Int) extends Pointer(max) {
+class BoundedPointer(max: Int) extends Pointer(max) {
     protected var sign = 1
 
     override def increment() {
@@ -43,7 +43,7 @@ class BoundedPointer(max:Int) extends Pointer(max) {
     }
 }
 
-class LoopedBoundedPointer(max:Int) extends BoundedPointer(max) {
+class LoopedBoundedPointer(max: Int) extends BoundedPointer(max) {
     override def increment() {
         raw = (raw + sign*1 + max) % max
     }

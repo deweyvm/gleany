@@ -23,7 +23,7 @@ package com.explatcreations.gleany.audio
 
 import com.badlogic.gdx.audio
 
-class Sfx(manager:AudioManager, sound:audio.Music, looped:Boolean) extends AudioInstance(manager) {
+class Sfx(manager: AudioManager, sound: audio.Music, looped: Boolean) extends AudioInstance(manager) {
     private var adjVolume = 1f
     override def play() {
         manager += this
@@ -31,7 +31,7 @@ class Sfx(manager:AudioManager, sound:audio.Music, looped:Boolean) extends Audio
         sound.play()
     }
 
-    def setAdjustVolume(adjVol:Float) {
+    def setAdjustVolume(adjVol: Float) {
         adjVolume = adjVol
         setVolume(manager.settings.getSfxVolume)
     }
@@ -40,7 +40,7 @@ class Sfx(manager:AudioManager, sound:audio.Music, looped:Boolean) extends Audio
         sound.isPlaying
     }
 
-    override def setVolume(newVolume:Float) {
+    override def setVolume(newVolume: Float) {
         sound.setVolume(newVolume*adjVolume)
     }
 

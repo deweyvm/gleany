@@ -35,7 +35,7 @@ import com.badlogic.gdx.math.MathUtils
  * @author deweyvm
  */
 
-class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
+class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
     val GridScale = 4
     val BufferX = -10
     val BufferY = 0
@@ -80,7 +80,7 @@ class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
 
     def length = particles.length
 
-    def foreach(func:Drop => Unit) {
+    def foreach(func: Drop => Unit) {
         particles foreach func
     }
 
@@ -92,7 +92,7 @@ class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
         applyForces()
     }
 
-    private def updateParticle(drop:Drop) {
+    private def updateParticle(drop: Drop) {
         drop.xPrev = drop.x
         drop.yPrev = drop.y
         drop.x += drop.vx * Timestep
@@ -114,7 +114,7 @@ class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
         }
     }
 
-    private def applyGravity(drop:Drop) {
+    private def applyGravity(drop: Drop) {
         val randAmount = 1
         //drop.vx += scala.math.random.toFloat*randAmount*2 - randAmount
         drop.vy += scala.math.random.toFloat*randAmount*2 - randAmount
@@ -185,7 +185,7 @@ class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
         pi.vy = vy * RepulseForce
     }
 
-    private def capVelocity(drop:Drop) {
+    private def capVelocity(drop: Drop) {
         val height = rows + 20f
         val vxMax = scala.math.abs(((height - drop.y)/height)*VelocityCap)
         drop.vx = MathUtils.clamp(drop.vx, 0, vxMax)
@@ -207,11 +207,11 @@ class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
     }
 
     private def applyViscosity() {
-        particles foreach { pi:Drop =>
+        particles foreach { pi: Drop =>
             val nearParticles = particles.getAdjacent(pi)
             val len = scala.math.min(nearParticles.length, MaxNeighbors)
 
-            (0 until len) foreach { j:Int =>
+            (0 until len) foreach { j: Int =>
                 val pj = nearParticles(j)
                 var q = dst2(pi, pj)
                 if (q < InteractionRadius2 && q != 0) {
@@ -248,7 +248,7 @@ class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
         val d2 = new Array[Float](MaxNeighbors)
         val d = new Array[Float](MaxNeighbors)
 
-        particles foreach { pi:Drop =>
+        particles foreach { pi: Drop =>
             pi.density = 0
             pi.nearDensity = 0
             val nearParticles = particles.getAdjacent(pi)
@@ -337,7 +337,7 @@ class FluidSimulator(params:FluidParams, worldWidth:Int, worldHeight:Int) {
         }
 
         for (i <- 0 until 10; j <- 0 until 10) {
-            val newp:Drop = new Drop(mouseX + i, mouseY + j)
+            val newp: Drop = new Drop(mouseX + i, mouseY + j)
             particles += newp
         }
     }

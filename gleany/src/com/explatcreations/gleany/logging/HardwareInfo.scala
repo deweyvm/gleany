@@ -24,12 +24,12 @@ package com.explatcreations.gleany.logging
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL10
-object HardwareInfo
+
 class HardwareInfo {
     val os = getOS
 
     def getOS: OS = {
-        val OSName= System.getProperty("os.name").toLowerCase
+        val OSName = System.getProperty("os.name").toLowerCase
         if (OSName.contains("win")) {
             OS.Windows
         } else if (OSName.contains("mac")) {
@@ -48,11 +48,11 @@ class HardwareInfo {
     def getOutput(command: String*): String = {
         try {
             import scala.sys.process._
-            val seq:Seq[String] = command
-            val result = seq.lines.fold("")((a:String, b:String) => a + b)
+            val seq: Seq[String] = command
+            val result = seq.lines.fold("")((a: String, b: String) => a + b)
             result
         } catch {
-            case t : Throwable => {
+            case t: Throwable => {
                 t.printStackTrace()
                 "Failure "
             }
@@ -71,7 +71,7 @@ class HardwareInfo {
     }
 
     private def getNumProcessors: String = {
-        if (os eq OS.Windows) {
+        if (os == OS.Windows) {
             System.getenv("NUMBER_OF_PROCESSORS")
         } else {
             val lines = Gdx.files.absolute("/proc/cpuinfo").readString().split("\n")
@@ -80,10 +80,10 @@ class HardwareInfo {
     }
 
     override def toString: String = {
-        val numProcessors: String = getNumProcessors
-        val processorName: String = getProcessorName
-        val os: String = System.getProperty("os.name")
-        val gpu: String = getGpuInfo
+        val numProcessors = getNumProcessors
+        val processorName = getProcessorName
+        val os = System.getProperty("os.name")
+        val gpu = getGpuInfo
         """|---- System information ----
            |Operating system     : %1$s
            |Number of processors : %2$s

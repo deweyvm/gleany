@@ -25,15 +25,15 @@ import com.badlogic.gdx.utils.XmlReader
 import com.explatcreations.gleany.Glean
 
 trait ITiledMap {
-    val width:Int
-    val height:Int
-    def getProperty(name:String):String
-    def getObjectLayer(name:String):Option[Seq[MapObject]]
-    def getTileLayer(name:String):Array[Array[Int]]
+    val width: Int
+    val height: Int
+    def getProperty(name: String): String
+    def getObjectLayer(name: String): Option[Seq[MapObject]]
+    def getTileLayer(name: String): Array[Array[Int]]
 }
 
 
-class GleanyTiledMap(mapName:String) extends ITiledMap {
+class GleanyTiledMap(mapName: String) extends ITiledMap {
     private type TileData = (Int, Int, Array[Array[Int]])
     private val xml = new XmlReader()
     private val root = xml.parse(Glean.y.files.map(mapName))
@@ -45,19 +45,19 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
     override val width = getWidth
     override val height = getHeight
 
-    override def getProperty(name:String):String = {
+    override def getProperty(name: String): String = {
         properties(name)
     }
 
-    override def getObjectLayer(name:String):Option[Seq[MapObject]] = {
+    override def getObjectLayer(name: String): Option[Seq[MapObject]] = {
         objects.get(name)
     }
 
-    override def getTileLayer(name:String):Array[Array[Int]] = {
+    override def getTileLayer(name: String): Array[Array[Int]] = {
         layers(name)._3
     }
 
-    private def getFromLayer(getter:TileData => Int) = {
+    private def getFromLayer(getter: TileData => Int) = {
         if (layers.isEmpty) {
             throw new IllFormedMapException(mapName, "no tile layers found")
         } else {
@@ -73,9 +73,9 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
         getFromLayer(_._2)
     }
 
-    private def makeGidMap:Map[String, Int] = {
+    private def makeGidMap: Map[String, Int] = {
         val tilesetNodes = root.getChildrenByName("tileset")
-        val pairs = tilesetNodes.toArray map { e:XmlReader.Element =>
+        val pairs = tilesetNodes.toArray map { e: XmlReader.Element =>
             val name = e.get("name")
             val firstGid = e.getInt("firstgid")
             (name, firstGid)
@@ -83,12 +83,12 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
         pairs.toMap
     }
 
-    private def makeObjects:Map[String, Seq[MapObject]] = {
+    private def makeObjects: Map[String, Seq[MapObject]] = {
         val groupsNodes = root.getChildrenByName("objectgroup")
-        val objectPairs = groupsNodes.toArray map { e:XmlReader.Element =>
+        val objectPairs = groupsNodes.toArray map { e: XmlReader.Element =>
             val name = e.get("name")
             val objectsNodes = e.getChildrenByName("object")
-            val objects = objectsNodes.toArray map { obj:XmlReader.Element =>
+            val objects = objectsNodes.toArray map { obj: XmlReader.Element =>
                 val x = obj.getInt("x")
                 val y = obj.getInt("y")
                 val id = obj.getAttribute("name")//we store the id field in "name"
@@ -96,9 +96,9 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
                 //val `type` = obj.get("type")//type ignored
                 //val width = obj.getInt("width")//width ignored
                 //val height = obj.getInt("height")//height ignored
-                /*val propertiesNode:XmlReader.Element = obj.getChildByName("properties")
+                /*val propertiesNode: XmlReader.Element = obj.getChildByName("properties")
                 val propertyNodes = propertiesNode.getChildrenByName("property")
-                val pairs = propertyNodes.toArray map { prop:XmlReader.Element =>
+                val pairs = propertyNodes.toArray map { prop: XmlReader.Element =>
                     val name = prop.get("name")
                     val value = prop.get("value")
                     (name, value)
@@ -112,9 +112,9 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
 
     }
 
-    private def makeLayers:Map[String,TileData] = {
+    private def makeLayers: Map[String,TileData] = {
         val layerNodes = root.getChildrenByName("layer")
-        val pairs = layerNodes.toArray map { e:XmlReader.Element =>
+        val pairs = layerNodes.toArray map { e: XmlReader.Element =>
             val name = e.get("name")
             val width = e.getInt("width")
             val height = e.getInt("height")
@@ -126,7 +126,7 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
 
     private def makeProperties = {
         val propertyElement = root.getChildByName("properties")
-        val pairs = 0 until propertyElement.getChildCount map { j:Int =>
+        val pairs = 0 until propertyElement.getChildCount map { j: Int =>
             val prop = propertyElement.getChild(j)
             val key = prop.get("name")
             val value = prop.get("value")
@@ -135,7 +135,7 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
         pairs.toMap
     }
 
-    private def parseCsv(firstGid:Int, data:String, width:Int, height:Int):Array[Array[Int]] = {
+    private def parseCsv(firstGid: Int, data: String, width: Int, height: Int): Array[Array[Int]] = {
         val rows = data.split("\r\n|\r|\n")
         rows.map {
             _.replaceAll(",\\s*$", "")
@@ -149,7 +149,7 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
             "Tile Layer: " + name
         }).mkString("", "\n", "\n")
 
-        def objToString(obj:MapObject) = {
+        def objToString(obj: MapObject) = {
             "Object <id=%s> <x=%d> <y=%d>".format(obj.id, obj.x, obj.y)
         }
         val objectsString = (objects map {case (name, objects) =>
@@ -162,12 +162,12 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
 
 
 object IllFormedMapException {
-    def getMessage(mapName:String, reason:String) = {
+    def getMessage(mapName: String, reason: String) = {
         "Failed to load map \"%s\": %s" format (mapName, reason)
     }
 }
 
-class IllFormedMapException(mapName:String, reason:String) extends RuntimeException(IllFormedMapException.getMessage(mapName, reason))
+class IllFormedMapException(mapName: String, reason: String) extends RuntimeException(IllFormedMapException.getMessage(mapName, reason))
 
-case class MapObject(id:String, x:Int, y:Int)
+case class MapObject(id: String, x: Int, y: Int)
 

@@ -29,10 +29,10 @@ import com.explatcreations.gleany.audio.AudioManager
 import com.explatcreations.gleany.loading.GleanyTiledMap
 
 object Glean {
-    var y:Gleany = null
+    var y: Gleany = null
 }
 
-class Gleany(resolver:PathResolver, val settings:Settings) {
+class Gleany(resolver: PathResolver, val settings: Settings) {
     val audio = new AudioManager(settings)
     val files = new Files(resolver)
 
@@ -46,12 +46,12 @@ object GleanyGame {
     /**
      * this function does not return
      */
-    def runGame(config:GleanyConfig, game:GleanyGame) {
+    def runGame(config: GleanyConfig, game: GleanyGame) {
         new LwjglApplication(game, config.toLwjgl)
     }
 }
 
-abstract class GleanyGame(initializer:GleanyInitializer) extends ApplicationListener {
+abstract class GleanyGame(initializer: GleanyInitializer) extends ApplicationListener {
 
     def gleanyUpdate() {
         Glean.y.audio.update()
@@ -74,5 +74,5 @@ abstract class GleanyGame(initializer:GleanyInitializer) extends ApplicationList
     override def dispose() { }
     override def pause() { }
     override def resume() { }
-    override def resize(width:Int, height:Int) { }
+    override def resize(width: Int, height: Int) { }
 }

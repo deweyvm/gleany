@@ -61,11 +61,11 @@ object LoadUtils {
         scanner.next
     }
 
-    def load[T](cl:Class[_], name:String, makeNew:() => T, verify:T => T):T = {
+    def load[T](cl: Class[_], name: String, makeNew: () => T, verify: T => T): T = {
         def tryLoad() = {
             try {
                 ensureDirectory(Directory)
-                val path: String = Directory + "/" + name
+                val path = Directory + "/" + name
                 json.fromJson(cl, loadFile(path)).asInstanceOf[T]
             } catch {
                 case e: Throwable => {
@@ -79,14 +79,14 @@ object LoadUtils {
         verify(tryLoad())
     }
 
-    def flush[T](thing:T, name:String) {
+    def flush[T](thing: T, name: String) {
         try {
-            val path: String = Directory + "/" + name
-            val file: File = new File(path)
+            val path = Directory + "/" + name
+            val file = new File(path)
             if (!file.exists && !file.createNewFile) {
                 throw new RuntimeException(String.format("Failed to create file '%s' because <unknown>.", path))
             }
-            val writer: PrintWriter = new PrintWriter(path)
+            val writer = new PrintWriter(path)
             writer.print(json.prettyPrint(thing))
             writer.close()
         } catch {
@@ -97,7 +97,7 @@ object LoadUtils {
     }
 
     def ensureDirectory(path: String) {
-        val file: File = new File(path)
+        val file = new File(path)
         if (file.exists && !file.isDirectory) {
             throw new RuntimeException(String.format("Expected file '%s' to be a directory. If it is safe to do so, rename that file or delete it and try again.", path))
         } else if (!file.exists && !file.mkdir) {

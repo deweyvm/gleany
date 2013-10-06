@@ -28,7 +28,7 @@ import com.explatcreations.gleany.saving.AudioSettings
 class ActiveAudioCollection {
     private var playing = ArrayBuffer[AudioInstance]()
     private var paused = false
-    def +=(audio:AudioInstance) {
+    def +=(audio: AudioInstance) {
         playing += audio
     }
 
@@ -53,7 +53,7 @@ class ActiveAudioCollection {
     }
 }
 
-class AudioManager(val settings:AudioSettings) {
+class AudioManager(val settings: AudioSettings) {
     Debug.load()
     //fixme -- code clones
     private val playingSfx = new ActiveAudioCollection
@@ -63,11 +63,11 @@ class AudioManager(val settings:AudioSettings) {
     private val allAudio = ArrayBuffer[AudioInstance]()
 
 
-    def +=(audio:Sfx) {playingSfx += audio}
-    def +=(audio:Music) {playingMusic += audio}
+    def +=(audio: Sfx) { playingSfx += audio }
+    def +=(audio: Music) { playingMusic += audio }
 
 
-    def register(audio:AudioInstance) {
+    def register(audio: AudioInstance) {
         allAudio += audio
     }
 
@@ -76,12 +76,12 @@ class AudioManager(val settings:AudioSettings) {
         playingMusic.update()
     }
 
-    def setSfxVolume(newVolume:Float) {
+    def setSfxVolume(newVolume: Float) {
         sfxVolume = newVolume
         allAudio filter {_.isInstanceOf[Sfx]} foreach {_.setVolume(newVolume)}
     }
 
-    def setMusicVolume(newVolume:Float) {
+    def setMusicVolume(newVolume: Float) {
         musicVolume = newVolume
         allAudio filter {_.isInstanceOf[Music]} foreach {_.setVolume(newVolume)}
     }

@@ -40,7 +40,7 @@ object Color {
     val White = Color(1,1,1)
     val Violet = Color(204/255f,0,125/255f)
     val Orange = Color(1, 0.78f, 0)
-    def fromHsb(i:Float, saturation:Float=1f, brightness:Float=1f) = {
+    def fromHsb(i: Float, saturation: Float=1f, brightness: Float=1f) = {
         val hue = MathUtils.clamp(i, 0, 1)
         val hsv = java.awt.Color.getHSBColor(hue, saturation, brightness)
         val r = hsv.getRed/255f
@@ -49,11 +49,11 @@ object Color {
         new Color(r, g, b, 1)
     }
 
-    def fromRgb(r:Float, g:Float, b:Float) = {
+    def fromRgb(r: Float, g: Float, b: Float) = {
         Color(r, g, b, 1)
     }
 
-    def fromRgba(r:Float, g:Float, b:Float, a:Float) = {
+    def fromRgba(r: Float, g: Float, b: Float, a: Float) = {
         Color(r, g, b, a)
     }
 
@@ -61,19 +61,19 @@ object Color {
         fromHsb(MathUtils.random(), 1, 1)
     }
 
-    def blend(c1:Color, c2:Color, prop:Float) = {
+    def blend(c1: Color, c2: Color, prop: Float) = {
         val r = c1.r*prop + c2.r*(1 - prop)
         val g = c1.g*prop + c2.g*(1 - prop)
         val b = c1.b*prop + c2.b*(1 - prop)
         Color(r, g, b, 1)
     }
 }
-case class Color(r:Float, g:Float, b:Float, a:Float=1) {
+case class Color(r: Float, g: Float, b: Float, a: Float=1) {
     private val libgdxColor = new LibgdxColor(r, g, b, a)
     def toLibgdxColor = libgdxColor
 
 
-    def dim(factor:Float) = {
+    def dim(factor: Float) = {
         Color(r/factor, g/factor, b/factor)
     }
 }

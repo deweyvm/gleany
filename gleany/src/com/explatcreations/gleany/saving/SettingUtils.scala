@@ -26,7 +26,7 @@ import com.explatcreations.gleany.data.Point2i
 import com.badlogic.gdx.math.MathUtils
 
 object SettingUtils {
-    def scalaMapToJava[K,V](map:Map[K,V]):java.util.Map[K,V] = {
+    def scalaMapToJava[K,V](map: Map[K,V]): java.util.Map[K,V] = {
         val result = new util.HashMap[K,V]()
         for(k <- map.keys) {
             result.put(k, map(k))
@@ -35,7 +35,7 @@ object SettingUtils {
     }
 }
 
-class SettingUtils(controls:ControlNameCollection[ControlName], defaults:SettingDefaults) {
+class SettingUtils(controls: ControlNameCollection[ControlName], defaults: SettingDefaults) {
     import SettingUtils.scalaMapToJava
 
 
@@ -48,13 +48,13 @@ class SettingUtils(controls:ControlNameCollection[ControlName], defaults:Setting
                             defaults.SfxVolume)
     }
 
-    def verify(raw:RawSettings): RawSettings = {
+    def verify(raw: RawSettings): RawSettings = {
         verify(raw, defaults.WindowSize)
     }
 
     private def verifyMap[T](raw: RawSettings,
                              map: java.util.Map[String, T],
-                             makeDefault: () => java.util.Map[String, T]):java.util.Map[String, T] = {
+                             makeDefault: () => java.util.Map[String, T]): java.util.Map[String, T] = {
         if (map == null) {
             return makeDefault()
         }

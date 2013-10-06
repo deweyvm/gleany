@@ -26,10 +26,10 @@ import org.lwjgl.opengl.{Display => LwjglDisplay}
 import com.explatcreations.gleany.data.Point2i
 
 object DisplayType {
-    def fromInt(int:Int) = Display.All(int)//fixme error handling
+    def fromInt(int: Int) = Display.All(int)//fixme error handling
 }
 
-abstract class DisplayType(id:Int) {
+abstract class DisplayType(id: Int) {
     def toInt = id
 }
 
@@ -39,7 +39,7 @@ object Display {
     case object Fullscreen extends DisplayType(1)
     case object WindowedFullscreen extends DisplayType(2)
 
-    def setDisplayMode(mode:DisplayType, defaultWindowSize:Point2i) {
+    def setDisplayMode(mode: DisplayType, defaultWindowSize: Point2i) {
         mode match {
             case Fullscreen =>
                 val desktopMode = Gdx.graphics.getDesktopDisplayMode

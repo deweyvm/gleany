@@ -30,11 +30,11 @@ import com.explatcreations.gleany.audio.{Music, Sfx}
 
 object AssetLoader {
 
-    def loadTexture(name:String) = {
+    def loadTexture(name: String) = {
         new Texture(Glean.y.files.texture(name))
     }
 
-    def makeTextureRegion(texture:Texture, recti:Option[Recti]=None) = {
+    def makeTextureRegion(texture: Texture, recti: Option[Recti]=None) = {
         val result = recti map { r =>
             new TextureRegion(texture, r.x, r.y, r.width, r.height)
         } getOrElse new TextureRegion(texture)
@@ -42,7 +42,7 @@ object AssetLoader {
         result
     }
 
-    def loadFont(name:String, pt:Int) = {
+    def loadFont(name: String, pt: Int) = {
         val gen = new FreeTypeFontGenerator(Glean.y.files.font(name))
         val font = gen.generateFont(pt, FreeTypeFontGenerator.DEFAULT_CHARS, true)
         gen.dispose()
@@ -52,12 +52,12 @@ object AssetLoader {
     /**
      * todo: could we automatically detect the extension?
      */
-    def loadSound(name:String, looped:Boolean) = {
+    def loadSound(name: String, looped: Boolean) = {
         val sound = Gdx.audio.newMusic(Glean.y.files.sfx(name))
         new Sfx(Glean.y.audio, sound, looped)
     }
 
-    def loadMusic(name:String) = {
+    def loadMusic(name: String) = {
         val music = Gdx.audio.newMusic(Glean.y.files.music(name))
         new Music(Glean.y.audio, music)
     }

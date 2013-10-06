@@ -23,7 +23,7 @@ package com.explatcreations.gleany.fluid
 
 import collection.mutable.ArrayBuffer
 
-class FluidTable(val cols:Int, val rows:Int, maxAdjacent:Int) {
+class FluidTable(val cols: Int, val rows: Int, maxAdjacent: Int) {
     val particles = new ArrayBuffer[Drop](rows*cols)
     var grid = resetGrid
     val emptyList = ArrayBuffer[Drop]()
@@ -35,11 +35,11 @@ class FluidTable(val cols:Int, val rows:Int, maxAdjacent:Int) {
         }
     }
 
-    def +=(drop:Drop) {
+    def +=(drop: Drop) {
         particles += drop
     }
 
-    def -=(drop:Drop) {
+    def -=(drop: Drop) {
         particles -= drop
     }
 
@@ -49,11 +49,11 @@ class FluidTable(val cols:Int, val rows:Int, maxAdjacent:Int) {
         grid = resetGrid
     }
 
-    def foreach(func:Drop => Unit) {
+    def foreach(func: Drop => Unit) {
         particles foreach func
     }
 
-    def getAdjacent(drop:Drop):IndexedSeq[Drop] = {
+    def getAdjacent(drop: Drop): IndexedSeq[Drop] = {
         val x = drop.x.toInt
         val y = drop.y.toInt
         if (!inRange(x, y)) {
@@ -62,7 +62,7 @@ class FluidTable(val cols:Int, val rows:Int, maxAdjacent:Int) {
         grid(x*rows + y)
     }
 
-    def updateGrid(drop:Drop) {
+    def updateGrid(drop: Drop) {
         val x = drop.x.toInt
         val y = drop.y.toInt
         val xPrev = drop.xPrev.toInt
@@ -80,7 +80,7 @@ class FluidTable(val cols:Int, val rows:Int, maxAdjacent:Int) {
         particles foreach  {addInterRadius(_)}
     }
 
-    def addInterRadius(drop:Drop) {
+    def addInterRadius(drop: Drop) {
         val posX = drop.x.toInt
         val posY = drop.y.toInt
 
@@ -93,7 +93,7 @@ class FluidTable(val cols:Int, val rows:Int, maxAdjacent:Int) {
         }
     }
 
-    def inRange(x:Float, y:Float) = {
+    def inRange(x: Float, y: Float) = {
         (x > 0 && x < cols && y > 0 && y < rows)
     }
 

@@ -25,7 +25,7 @@ import com.badlogic.gdx.controllers.{ControllerAdapter, Controller}
 import collection.mutable
 import triggers.JoypadHelper
 
-class JoypadWrapper(controller:Controller) {
+class JoypadWrapper(controller: Controller) {
     val buttonState = new mutable.HashMap[Int,Boolean]().withDefault(_ => false)
     val axisState = new mutable.HashMap[Int,Int]().withDefault(_ => 0)
     val listener = new ControllerAdapter {
@@ -50,11 +50,11 @@ class JoypadWrapper(controller:Controller) {
     }
     controller.addListener(listener)
 
-    def isButtonPressed(code:Int):Boolean = {
+    def isButtonPressed(code: Int): Boolean = {
         buttonState(code)
     }
 
-    def isAxisPressed(code:Int):Float = {
+    def isAxisPressed(code: Int): Float = {
         axisState(code)
     }
 }

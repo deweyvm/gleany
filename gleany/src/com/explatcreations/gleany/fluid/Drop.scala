@@ -23,7 +23,7 @@ package com.explatcreations.gleany.fluid
 
 import util.Random
 
-class Drop(var x:Float, var y:Float) {
+class Drop(var x: Float, var y: Float) {
     var g = Random.nextFloat()
     var b = Random.nextFloat()
     var density = 0f

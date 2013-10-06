@@ -23,12 +23,10 @@ package com.explatcreations.gleany.data
 
 
 object WrappedArray {
-    def nonLooped[T](elements:IndexedSeq[T]) = {
-        new WrappedArray(elements, false)
-    }
+    def nonLooped[T](elements: IndexedSeq[T]) = new WrappedArray(elements, false)
 }
 
-class WrappedArray[T](seq:IndexedSeq[T], looped:Boolean) {
+class WrappedArray[T](seq: IndexedSeq[T], looped: Boolean) {
 
     val length = seq.length
     if (seq.length == 0) {
@@ -59,13 +57,11 @@ class WrappedArray[T](seq:IndexedSeq[T], looped:Boolean) {
         ptr.reverse()
     }
 
-    def foreach(func:T=>Unit) {
+    def foreach(func: T=>Unit) {
         seq foreach func
     }
 
-    def zipWithIndex = {
-        seq.zipWithIndex
-    }
+    def zipWithIndex = seq.zipWithIndex
 
     def reset() {
         ptr.setToBeginning()
@@ -73,7 +69,7 @@ class WrappedArray[T](seq:IndexedSeq[T], looped:Boolean) {
 
     def get = ptr.get(seq)
 
-    def doSelected(func:(T, Boolean) => Unit) {
+    def doSelected(func: (T, Boolean) => Unit) {
         val selected = get
         foreach {t =>
             func(t, t == selected)

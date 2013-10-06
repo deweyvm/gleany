@@ -29,7 +29,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer
 object Fbo {
     private var isDrawing = false
 
-    def makeFrameBuffer(format:Format, width:Int, height:Int) = {
+    def makeFrameBuffer(format: Format, width: Int, height: Int) = {
         val fbo = new FrameBuffer(format, width, height, true)
         fbo.getColorBufferTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest)
         fbo.getColorBufferTexture.setWrap(TextureWrap.ClampToEdge, TextureWrap.ClampToEdge)
@@ -37,7 +37,7 @@ object Fbo {
     }
 }
 
-class Fbo(val width:Int, val height:Int) {
+class Fbo(val width: Int, val height: Int) {
     import Fbo._
     private val fbo = makeFrameBuffer(Format.RGBA8888, width, height)
 
@@ -52,7 +52,7 @@ class Fbo(val width:Int, val height:Int) {
         fbo.end()
     }
 
-    def drawSimple(shader:Shader, mesh:Mesh, func: () => Unit) {
+    def drawSimple(shader: Shader, mesh: Mesh, func: () => Unit) {
         draw(func)
 
         shader.draw(() => {

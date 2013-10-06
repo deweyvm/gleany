@@ -23,7 +23,7 @@ package com.explatcreations.gleany.audio
 
 import com.badlogic.gdx.audio
 
-class Music(manager:AudioManager, music:audio.Music) extends AudioInstance(manager) {
+class Music(manager: AudioManager, music: audio.Music) extends AudioInstance(manager) {
     private var adjVolume = 1f
     override def play() {
         manager += this
@@ -34,12 +34,12 @@ class Music(manager:AudioManager, music:audio.Music) extends AudioInstance(manag
         music.isPlaying
     }
 
-    def setAdjustVolume(adjVol:Float) {
+    def setAdjustVolume(adjVol: Float) {
         adjVolume = adjVol
         setVolume(manager.settings.getMusicVolume)
     }
 
-    override def setVolume(newVolume:Float) {
+    override def setVolume(newVolume: Float) {
         music.setVolume(newVolume*adjVolume)
     }
 

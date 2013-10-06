@@ -22,11 +22,11 @@
 package com.explatcreations.gleany.input
 
 trait ButtonSpec
-case class AxisButton(code:Int, value:Int) extends ButtonSpec
-case class FaceButton(code:Int) extends ButtonSpec
+case class AxisButton(code: Int, value: Int) extends ButtonSpec
+case class FaceButton(code: Int) extends ButtonSpec
 
 object JoypadButton {
-    def fromString(string:String):JoypadButton = new JoypadButton(string, Map(string))
+    def fromString(string: String): JoypadButton = new JoypadButton(string, Map(string))
 
     val Map = List(
         ("DPadUp", AxisButton(0, -1)),
@@ -49,6 +49,6 @@ object JoypadButton {
     val All = Map map {case (name, info) => new JoypadButton(name, info)}
 }
 
-case class JoypadButton(descriptor:String, info:ButtonSpec) {
-    override def toString:String = descriptor
+case class JoypadButton(descriptor: String, info: ButtonSpec) {
+    override def toString: String = descriptor
 }

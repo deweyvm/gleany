@@ -21,7 +21,7 @@
 
 package com.explatcreations.gleany.data
 
-abstract class Pointer(max:Int) {
+abstract class Pointer(max: Int) {
     def increment()
     def decrement()
 
@@ -35,5 +35,5 @@ abstract class Pointer(max:Int) {
         raw = max - 1
     }
 
-    def get[T](seq:IndexedSeq[T]):T = seq(raw)
+    def get[T](seq: IndexedSeq[T]): T = seq(raw)
 }

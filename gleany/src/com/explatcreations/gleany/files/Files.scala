@@ -24,16 +24,15 @@ package com.explatcreations.gleany.files
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.files.FileHandle
 
-class Files(resolver:PathResolver) {
-    private def throwFileNotFound(path:String):Nothing = {
+class Files(resolver: PathResolver) {
+    private def throwFileNotFound(path: String): Nothing = {
         throw new RuntimeException("failed to find file \"" + path + "\"")
     }
 
-    private def exists(path:String) = {
-        Gdx.files.internal(path).exists()
-    }
+    private def exists(path: String) = Gdx.files.internal(path).exists()
 
-    private def getFile(path:String) = {
+
+    private def getFile(path: String) = {
         val file = Gdx.files.internal(path)
         if (!file.exists()) {
             throwFileNotFound(path)
@@ -41,30 +40,19 @@ class Files(resolver:PathResolver) {
         file
     }
 
-    private def getMapPath(name:String) = resolver.MapPath + "/" + name + ".tmx"
+    private def getMapPath(name: String) = resolver.MapPath + "/" + name + ".tmx"
 
-    def mapExists(name:String) = {
-        exists(getMapPath(name))
-    }
+    def mapExists(name: String) = exists(getMapPath(name))
 
-    def map(name:String) = {
-        getFile(getMapPath(name))
-    }
+    def map(name: String) = getFile(getMapPath(name))
 
-    def shader(name:String) = {
-        getFile(resolver.ShaderPath + "/" + name)
-    }
+    def shader(name: String) = getFile(resolver.ShaderPath + "/" + name)
 
-    def font(name:String) = {
-        getFile(resolver.FontPath + "/" + name)
-    }
+    def font(name: String) = getFile(resolver.FontPath + "/" + name)
 
-    def texture(name:String) = {
-        getFile(resolver.TexturePath + "/" + name + ".png")
-    }
+    def texture(name: String) = getFile(resolver.TexturePath + "/" + name + ".png")
 
-
-    private def findSound(name:String, root:String):FileHandle = {
+    private def findSound(name: String, root: String): FileHandle = {
         val pathList = List("ogg", "wav") map { ext =>
             val path = root + "/" + name + "." + ext
             if (exists(path)) {
@@ -76,11 +64,8 @@ class Files(resolver:PathResolver) {
         pathList.flatten.map(getFile).headOption.getOrElse(throwFileNotFound(name))
     }
 
-    def music(name:String) = {
-        findSound(name, resolver.MusicPath)
-    }
+    def music(name: String) = findSound(name, resolver.MusicPath)
 
-    def sfx(name:String) = {
-        findSound(name, resolver.SfxPath)
-    }
+    def sfx(name: String) = findSound(name, resolver.SfxPath)
+
 }

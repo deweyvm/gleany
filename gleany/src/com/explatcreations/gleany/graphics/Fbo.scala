@@ -21,7 +21,7 @@
 
 package com.explatcreations.gleany.graphics
 
-import com.badlogic.gdx.graphics.{Mesh, GL10}
+import com.badlogic.gdx.graphics.{Texture, Mesh, GL10}
 import com.badlogic.gdx.graphics.Pixmap.Format
 import com.badlogic.gdx.graphics.Texture.{TextureWrap, TextureFilter}
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
@@ -29,7 +29,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer
 object Fbo {
   private var isDrawing = false
 
-  def makeFrameBuffer(format: Format, width: Int, height: Int) = {
+  def makeFrameBuffer(format: Format, width: Int, height: Int): FrameBuffer = {
     val fbo = new FrameBuffer(format, width, height, true)
     fbo.getColorBufferTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest)
     fbo.getColorBufferTexture.setWrap(TextureWrap.ClampToEdge, TextureWrap.ClampToEdge)
@@ -64,5 +64,5 @@ class Fbo(val width: Int, val height: Int) {
 
   }
 
-  def texture = fbo.getColorBufferTexture
+  def texture: Texture = fbo.getColorBufferTexture
 }

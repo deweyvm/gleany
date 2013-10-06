@@ -28,7 +28,7 @@ abstract class AudioInstance(manager: AudioManager) {
 
   def isPlaying: Boolean
 
-  def setVolume(newVolume: Float)
+  def setVolume(newVolume: Float): Unit
 
   def stop(): Unit
 

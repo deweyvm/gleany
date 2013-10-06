@@ -32,8 +32,8 @@ object Glean {
 }
 
 class Gleany(resolver: PathResolver, val settings: Settings) {
-  val audio = new AudioManager(settings)
-  val files = new Files(resolver)
+  val audio:AudioManager = new AudioManager(settings)
+  val files:Files = new Files(resolver)
 
 }
 

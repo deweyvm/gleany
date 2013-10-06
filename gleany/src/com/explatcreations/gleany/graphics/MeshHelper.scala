@@ -26,7 +26,7 @@ import com.badlogic.gdx.graphics.VertexAttribute
 import com.badlogic.gdx.graphics.VertexAttributes.Usage
 
 object MeshHelper {
-  def makeMesh = {
+  def makeMesh: Mesh = {
     val mesh = new Mesh(true, 4, 0,
       new VertexAttribute(Usage.Position, 3, "a_position"),
       new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"))

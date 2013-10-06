@@ -45,8 +45,8 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
   private val objects = makeObjects
   private val properties = makeProperties
 
-  override val width = getWidth
-  override val height = getHeight
+  override val width: Int = getWidth
+  override val height: Int = getHeight
 
   override def getProperty(name: String): String = properties(name)
 
@@ -145,7 +145,7 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
     }
   }
 
-  override def toString = {
+  override def toString: String = {
     val layerString = (layers map {
       case (name, tiles) =>
         "Tile Layer: " + name
@@ -165,7 +165,7 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
 
 
 object IllFormedMapException {
-  def getMessage(mapName: String, reason: String) =
+  def getMessage(mapName: String, reason: String): String =
     "Failed to load map \"%s\": %s" format(mapName, reason)
 
 }

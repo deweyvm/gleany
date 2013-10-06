@@ -25,7 +25,7 @@ import com.badlogic.gdx.graphics.g2d.{Sprite, SpriteBatch}
 import scala.collection.mutable.ArrayBuffer
 
 class SpriteRenderer {
-  val batch = new SpriteBatch(5000)
+  private val batch = new SpriteBatch(5000)
 
   var draws: ArrayBuffer[() => Unit] = ArrayBuffer[() => Unit]()
 

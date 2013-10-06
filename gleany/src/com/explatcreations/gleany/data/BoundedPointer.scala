@@ -34,9 +34,9 @@ class BoundedPointer(max: Int) extends Pointer(max) {
     raw = GleanyMath.clamp(raw - sign * 1, 0, max - 1)
   }
 
-  def isAtBeginning = raw <= 0
+  def isAtBeginning: Boolean = raw <= 0
 
-  def isAtEnd = raw >= max - 1
+  def isAtEnd: Boolean = raw >= max - 1
 
   def reverse() {
     sign = -sign

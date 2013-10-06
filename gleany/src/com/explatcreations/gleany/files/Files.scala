@@ -31,7 +31,6 @@ class Files(resolver: PathResolver) {
 
   private def exists(path: String) = Gdx.files.internal(path).exists()
 
-
   private def getFile(path: String) = {
     val file = Gdx.files.internal(path)
     if (!file.exists()) {
@@ -42,15 +41,15 @@ class Files(resolver: PathResolver) {
 
   private def getMapPath(name: String) = resolver.MapPath + "/" + name + ".tmx"
 
-  def mapExists(name: String) = exists(getMapPath(name))
+  def mapExists(name: String): Boolean = exists(getMapPath(name))
 
-  def map(name: String) = getFile(getMapPath(name))
+  def map(name: String): FileHandle = getFile(getMapPath(name))
 
-  def shader(name: String) = getFile(resolver.ShaderPath + "/" + name)
+  def shader(name: String): FileHandle = getFile(resolver.ShaderPath + "/" + name)
 
-  def font(name: String) = getFile(resolver.FontPath + "/" + name)
+  def font(name: String): FileHandle = getFile(resolver.FontPath + "/" + name)
 
-  def texture(name: String) = getFile(resolver.TexturePath + "/" + name + ".png")
+  def texture(name: String): FileHandle = getFile(resolver.TexturePath + "/" + name + ".png")
 
   private def findSound(name: String, root: String): FileHandle = {
     val pathList = List("ogg", "wav") map {
@@ -65,8 +64,8 @@ class Files(resolver: PathResolver) {
     pathList.flatten.map(getFile).headOption.getOrElse(throwFileNotFound(name))
   }
 
-  def music(name: String) = findSound(name, resolver.MusicPath)
+  def music(name: String): FileHandle = findSound(name, resolver.MusicPath)
 
-  def sfx(name: String) = findSound(name, resolver.SfxPath)
+  def sfx(name: String): FileHandle = findSound(name, resolver.SfxPath)
 
 }

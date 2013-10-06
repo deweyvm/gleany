@@ -27,10 +27,7 @@ import com.explatcreations.gleany.data.Point2i
 
 trait VideoSettings {
   def getDisplayType: DisplayType
-
-  def setDisplayType(value: DisplayType)
-
+  def setDisplayType(value: DisplayType): Unit
   def getWindowSize: Point2i
-
-  def setWindowSize(width: Int, height: Int)
+  def setWindowSize(width: Int, height: Int): Unit
 }

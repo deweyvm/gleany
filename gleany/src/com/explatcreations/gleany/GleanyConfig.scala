@@ -28,9 +28,9 @@ import com.badlogic.gdx.Files
 
 
 case class GleanyConfig(
-                           settings: VideoSettings with AudioSettings,
-                           title: String = "GleanyGame",
-                           iconPath: Option[String] = None) {
+    settings: VideoSettings with AudioSettings,
+    title: String = "GleanyGame",
+    iconPath: Option[String] = None) {
   def toLwjgl: LwjglApplicationConfiguration = lwjglConfig
 
   private val lwjglConfig = {

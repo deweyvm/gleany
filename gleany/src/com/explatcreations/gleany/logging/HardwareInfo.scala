@@ -26,7 +26,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL10
 
 class HardwareInfo {
-  val os = getOS
+  val os: OS = getOS
 
   def getOS: OS = {
     val OSName = System.getProperty("os.name").toLowerCase

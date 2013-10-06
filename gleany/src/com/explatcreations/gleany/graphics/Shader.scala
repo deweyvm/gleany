@@ -29,15 +29,15 @@ import com.explatcreations.gleany.{Glean, Debug}
 class Shader(vert: String, frag: String) {
   private val actions = scala.collection.mutable.Map[String, () => Unit]()
 
-  val shader = compileShader()
+  val shader:ShaderProgram = compileShader()
 
   private def compileShader() = {
-
     val result = new ShaderProgram(Glean.y.files.shader(vert),
       Glean.y.files.shader(frag))
     val log = result.getLog
     //disallow any warnings
-    if (!result.isCompiled || (log.length() != 0 && log.contains("warning"))) {
+    if (   !result.isCompiled
+        || (log.length() != 0 && log.contains("warning"))) {
       Debug.error(log)
       throw new RuntimeException()
     }

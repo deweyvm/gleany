@@ -40,7 +40,7 @@ class SettingUtils(controls: ControlNameCollection[ControlName], defaults: Setti
   import SettingUtils.scalaMapToJava
 
 
-  def makeNew =
+  def makeNew: RawSettings =
     RawSettings.makeNew(scalaMapToJava(controls.makeKeyboardDefault),
       scalaMapToJava(controls.makeJoypadDefault),
       defaults.WindowSize,

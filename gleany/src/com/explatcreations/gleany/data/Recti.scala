@@ -28,15 +28,15 @@ object Recti {
 
 case class Recti(x: Int, y: Int, width: Int, height: Int) {
 
-  lazy val right = x + width - 1
-  lazy val bottom = y + height - 1
-  lazy val center = Point2i(x + width / 2, y + height / 2)
+  lazy val right: Int = x + width - 1
+  lazy val bottom: Int = y + height - 1
+  lazy val center: Point2i = Point2i(x + width / 2, y + height / 2)
 
-  def contains(point: Point2f) =
+  def contains(point: Point2f): Boolean =
     !(point.x < x || point.x > right || point.y < y || point.y > bottom)
 
 
-  def intersects(other: Recti) = {
+  def intersects(other: Recti): Boolean = {
     val left = scala.math.max(x, other.x)
     val top = scala.math.max(y, other.y)
     val right = scala.math.min(this.right + 1, other.right + 1)
@@ -44,10 +44,10 @@ case class Recti(x: Int, y: Int, width: Int, height: Int) {
     (left < right) && (top < bottom)
   }
 
-  def +(other: Recti) =
+  def +(other: Recti): Recti =
     Recti(x + other.x, y + other.y, width + other.width, height + other.height)
 
-  def toRectf = Rectf(x, y, width, height)
+  def toRectf: Rectf = Rectf(x, y, width, height)
 
-  override def toString = "(%d,%d,%d,%d)" format(x, y, width, height)
+  override def toString: String = "(%d,%d,%d,%d)" format(x, y, width, height)
 }

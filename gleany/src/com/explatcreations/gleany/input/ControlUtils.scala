@@ -46,5 +46,5 @@ object ControlUtils {
 
   private val keyNameMap = gatherKeyNames
 
-  def getKeyName(code: Int) = keyNameMap(code)
+  def getKeyName(code: Int): String = keyNameMap(code)
 }

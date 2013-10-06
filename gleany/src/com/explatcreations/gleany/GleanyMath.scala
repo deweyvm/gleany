@@ -35,13 +35,13 @@ object GleanyMath {
   }*/
 
   def clamp(value: Float, min: Float, max: Float): Float = {
-    if (value < min) value
+    if (value < min) min
     else if (value > max) max
     else value
   }
 
   def clamp(value: Int, min: Int, max: Int): Int = {
-    if (value < min) value
+    if (value < min) min
     else if (value > max) max
     else value
   }

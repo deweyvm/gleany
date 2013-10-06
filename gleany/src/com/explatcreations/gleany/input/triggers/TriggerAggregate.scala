@@ -37,12 +37,12 @@ class TriggerAggregate(triggers: Seq[Trigger]) extends Control[Boolean] {
     }
   }
 
-  override def isPressed = flag > 0
+  override def isPressed: Boolean = flag > 0
 
-  override def justPressed = flag == 1
+  override def justPressed: Boolean = flag == 1
 
-  override def justReleased = prevFlag != 0 && flag == 0
+  override def justReleased: Boolean = prevFlag != 0 && flag == 0
 
-  override def zip(start: Int, num: Int) = justPressed || (flag > start && flag % num == 0)
+  override def zip(start: Int, num: Int): Boolean = justPressed || (flag > start && flag % num == 0)
 
 }

@@ -28,7 +28,7 @@ class JoypadTrigger(val button: JoypadButton) extends Trigger {
 
   import JoypadHelper._
 
-  override def isPressed = button.info match {
+  override def isPressed: Boolean = button.info match {
     case AxisButton(code, value) => controller exists {
       _.isAxisPressed(code) == value
     }

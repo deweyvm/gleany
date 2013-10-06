@@ -22,7 +22,7 @@
 package com.explatcreations.gleany.fluid
 
 object FluidParams {
-  def default = FluidParams(
+  def default: FluidParams = FluidParams(
     Timestep = 0.016666f,
     MaxParticles = 6000,
     MaxNeighbors = 150,
@@ -36,13 +36,13 @@ object FluidParams {
 }
 
 case class FluidParams(
-                          Timestep: Float,
-                          MaxParticles: Int,
-                          MaxNeighbors: Int,
-                          InteractionRadius: Float,
-                          LinearViscosity: Float,
-                          QuadraticViscosity: Float,
-                          RestDensity: Float,
-                          Stiffness: Float,
-                          NearStiffnessFactor: Float,
-                          MaxVelocity: Float)
+    Timestep: Float,
+    MaxParticles: Int,
+    MaxNeighbors: Int,
+    InteractionRadius: Float,
+    LinearViscosity: Float,
+    QuadraticViscosity: Float,
+    RestDensity: Float,
+    Stiffness: Float,
+    NearStiffnessFactor: Float,
+    MaxVelocity: Float)

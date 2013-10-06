@@ -26,15 +26,15 @@ import org.lwjgl.opengl.{Display => LwjglDisplay}
 import com.explatcreations.gleany.data.Point2i
 
 object DisplayType {
-  def fromInt(int: Int) = Display.All(int) //fixme error handling
+  def fromInt(int: Int): DisplayType = Display.All(int) //fixme error handling
 }
 
 abstract class DisplayType(id: Int) {
-  def toInt = id
+  def toInt: Int = id
 }
 
 object Display {
-  val All = Vector(Windowed, Fullscreen, WindowedFullscreen)
+  val All: IndexedSeq[DisplayType] = Vector(Windowed, Fullscreen, WindowedFullscreen)
 
   case object Windowed extends DisplayType(0)
 
@@ -59,6 +59,4 @@ object Display {
     }
 
   }
-
-
 }

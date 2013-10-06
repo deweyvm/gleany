@@ -33,10 +33,14 @@ class Settings(controls: ControlNameCollection[ControlName], defaults: SettingDe
   import SettingUtils.scalaMapToJava
 
   Debug.load()
-  val controlListeners = ArrayBuffer[() => Unit]()
+  private val controlListeners = ArrayBuffer[() => Unit]()
   val utils = new SettingUtils(controls, defaults)
   val filename = "settings.json"
   val raw: RawSettings = LoadUtils.load(classOf[RawSettings], filename, () => utils.makeNew, utils.verify)
+
+  def addListener(listener: () => Unit) {
+    controlListeners += listener
+  }
 
   override def getDisplayType = DisplayType.fromInt(raw.displayType)
 

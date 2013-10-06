@@ -36,40 +36,40 @@ import com.explatcreations.gleany.GleanyMath
  */
 
 class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
-  val GridScale = 4
-  val BufferX = -10
-  val BufferY = 0
-  val cols = worldWidth / GridScale
-  val rows = worldHeight / GridScale
+  val GridScale: Int = 4
+  val BufferX: Int = -10
+  val BufferY: Int = 0
+  val cols: Int = worldWidth / GridScale
+  val rows: Int = worldHeight / GridScale
 
-  val MaxSize = params.MaxParticles
-  val MaxNeighbors = params.MaxNeighbors
-  val VelocityCap = params.MaxVelocity
+  val MaxSize: Int = params.MaxParticles
+  val MaxNeighbors: Int = params.MaxNeighbors
+  val VelocityCap: Float = params.MaxVelocity
 
-  val InteractionRadius = params.InteractionRadius
-  val InteractionRadius2 = InteractionRadius * InteractionRadius
-  val LinearViscosity = params.LinearViscosity
-  val QuadraticViscosity = params.QuadraticViscosity
-  val Stiffness = params.Stiffness
-  val NearStiffness = params.NearStiffnessFactor
+  val InteractionRadius: Float = params.InteractionRadius
+  val InteractionRadius2: Float = InteractionRadius * InteractionRadius
+  val LinearViscosity: Float = params.LinearViscosity
+  val QuadraticViscosity: Float = params.QuadraticViscosity
+  val Stiffness: Float = params.Stiffness
+  val NearStiffness: Float = params.NearStiffnessFactor
 
-  val RestDensity = params.RestDensity
-  val Timestep = params.Timestep
-  val Timestep2 = Timestep * Timestep
+  val RestDensity: Float = params.RestDensity
+  val Timestep: Float = params.Timestep
+  val Timestep2: Float = Timestep * Timestep
 
-  val AttractForce = cols / 300f
-  val AttractRange = cols * 2f
-  val RepulseForce = cols / 1f
-  val RepulseRange = cols / 2f
+  val AttractForce: Float = cols / 300f
+  val AttractRange: Float = cols * 2f
+  val RepulseForce: Float = cols / 1f
+  val RepulseRange: Float = cols / 2f
 
-  val deleteQueue = ArrayBuffer[Drop]()
-  val particles = makeParticles
+  private val deleteQueue = ArrayBuffer[Drop]()
+  private val particles = makeParticles
 
   private def makeParticles = {
     val particles = new FluidTable(cols, rows, MaxNeighbors * 2 + 1)
     val spread = 64f
     for (i <- 0 until (MaxSize / spread).toInt; j <- 0 until spread.toInt) {
-      val prop = (i / MaxSize.toFloat)
+      val prop = i / MaxSize.toFloat
       val x = prop * (cols * spread)
       val y = (j / spread) * rows
       val drop = new Drop(x, y)
@@ -78,7 +78,7 @@ class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
     particles
   }
 
-  def length = particles.length
+  def length: Int = particles.length
 
   def foreach(func: Drop => Unit) {
     particles foreach func
@@ -332,9 +332,9 @@ class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
     processAddParticles()
   }
 
-  def getScaleX = worldWidth / cols.toFloat
+  def getScaleX: Float = worldWidth / cols.toFloat
 
-  def getScaleY = worldHeight / rows.toFloat
+  def getScaleY: Float = worldHeight / rows.toFloat
 
   private def processAddParticles() {
     if (!Gdx.input.isTouched(0)

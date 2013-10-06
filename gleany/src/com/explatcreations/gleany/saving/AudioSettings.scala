@@ -26,7 +26,7 @@ trait AudioSettings {
 
   def getMusicVolume: Float
 
-  def setSfxVolume(value: Float)
+  def setSfxVolume(value: Float): Unit
 
-  def setMusicVolume(value: Float)
+  def setMusicVolume(value: Float): Unit
 }

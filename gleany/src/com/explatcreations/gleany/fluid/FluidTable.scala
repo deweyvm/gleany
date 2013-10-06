@@ -43,7 +43,7 @@ class FluidTable(val cols: Int, val rows: Int, maxAdjacent: Int) {
     particles -= drop
   }
 
-  def length = particles.length
+  def length: Int = particles.length
 
   def clear() {
     grid = resetGrid
@@ -95,7 +95,7 @@ class FluidTable(val cols: Int, val rows: Int, maxAdjacent: Int) {
     }
   }
 
-  def inRange(x: Float, y: Float) = x > 0 && x < cols && y > 0 && y < rows
+  def inRange(x: Float, y: Float): Boolean = x > 0 && x < cols && y > 0 && y < rows
 
 
 }

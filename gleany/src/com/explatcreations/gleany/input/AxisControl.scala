@@ -35,12 +35,12 @@ class AxisControl(minus: Control[Boolean], plus: Control[Boolean]) extends Contr
     }
   }
 
-  override def isPressed = check(_.isPressed)
+  override def isPressed: Int = check(_.isPressed)
 
-  override def justPressed = check(_.justPressed)
+  override def justPressed: Int = check(_.justPressed)
 
-  override def justReleased = check(_.justReleased)
+  override def justReleased: Int = check(_.justReleased)
 
-  override def zip(start: Int, num: Int) = check(_.zip(start, num))
+  override def zip(start: Int, num: Int): Int = check(_.zip(start, num))
 
 }

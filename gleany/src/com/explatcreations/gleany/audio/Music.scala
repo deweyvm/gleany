@@ -31,7 +31,7 @@ class Music(manager: AudioManager, music: audio.Music) extends AudioInstance(man
     music.play()
   }
 
-  override def isPlaying = music.isPlaying
+  override def isPlaying: Boolean = music.isPlaying
 
   def setAdjustVolume(adjVol: Float) {
     adjVolume = adjVol

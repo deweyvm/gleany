@@ -24,17 +24,17 @@ package com.explatcreations.gleany.fluid
 import util.Random
 
 class Drop(var x: Float, var y: Float) {
-  var g = Random.nextFloat()
-  var b = Random.nextFloat()
-  var density = 0f
-  var nearDensity = 0f
-  var pressure = 0f
-  var nearPressure = 0f
+  var g: Float = Random.nextFloat()
+  var b: Float = Random.nextFloat()
+  var density: Float = 0f
+  var nearDensity: Float = 0f
+  var pressure: Float = 0f
+  var nearPressure: Float = 0f
 
-  var isEjecting = false
+  var isEjecting: Boolean = false
 
-  var xPrev = 0f
-  var yPrev = 0f
-  var vx = 0f
-  var vy = 0f
+  var xPrev: Float = 0f
+  var yPrev: Float = 0f
+  var vx: Float = 0f
+  var vy: Float = 0f
 }

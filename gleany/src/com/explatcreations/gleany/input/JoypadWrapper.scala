@@ -26,9 +26,9 @@ import collection.mutable
 import triggers.JoypadHelper
 
 class JoypadWrapper(controller: Controller) {
-  val buttonState = new mutable.HashMap[Int, Boolean]().withDefault(_ => false)
-  val axisState = new mutable.HashMap[Int, Int]().withDefault(_ => 0)
-  val listener = new ControllerAdapter {
+  private val buttonState = new mutable.HashMap[Int, Boolean]().withDefault(_ => false)
+  private val axisState = new mutable.HashMap[Int, Int]().withDefault(_ => 0)
+  private val listener = new ControllerAdapter {
     override def connected(controller: Controller) {}
 
     override def disconnected(controller: Controller) {}

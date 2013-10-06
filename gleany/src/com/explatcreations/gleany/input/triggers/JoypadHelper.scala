@@ -30,7 +30,7 @@ object JoypadHelper {
 
   val controller: Option[JoypadWrapper] = rawController map (new JoypadWrapper(_))
 
-  def round(axisValue: Float) = scala.math.signum((100 * axisValue).toInt)
+  def round(axisValue: Float): Int = scala.math.signum((100 * axisValue).toInt)
 
   private def getRawController: Option[Controller] = {
     try {

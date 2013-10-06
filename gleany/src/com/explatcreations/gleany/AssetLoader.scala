@@ -22,7 +22,7 @@
 package com.explatcreations.gleany
 
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.graphics.g2d.{BitmapFont, TextureRegion}
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.Gdx
 import com.explatcreations.gleany.data.Recti
@@ -30,10 +30,10 @@ import com.explatcreations.gleany.audio.{Music, Sfx}
 
 object AssetLoader {
 
-  def loadTexture(name: String) = new Texture(Glean.y.files.texture(name))
+  def loadTexture(name: String): Texture = new Texture(Glean.y.files.texture(name))
 
 
-  def makeTextureRegion(texture: Texture, recti: Option[Recti] = None) = {
+  def makeTextureRegion(texture: Texture, recti: Option[Recti] = None): TextureRegion = {
     val result = recti map {
       r =>
         new TextureRegion(texture, r.x, r.y, r.width, r.height)
@@ -42,22 +42,19 @@ object AssetLoader {
     result
   }
 
-  def loadFont(name: String, pt: Int) = {
+  def loadFont(name: String, pt: Int): BitmapFont = {
     val gen = new FreeTypeFontGenerator(Glean.y.files.font(name))
     val font = gen.generateFont(pt, FreeTypeFontGenerator.DEFAULT_CHARS, true)
     gen.dispose()
     font
   }
 
-  /**
-   * todo: could we automatically detect the extension?
-   */
-  def loadSound(name: String, looped: Boolean) = {
+  def loadSound(name: String, looped: Boolean): Sfx = {
     val sound = Gdx.audio.newMusic(Glean.y.files.sfx(name))
     new Sfx(Glean.y.audio, sound, looped)
   }
 
-  def loadMusic(name: String) = {
+  def loadMusic(name: String): Music = {
     val music = Gdx.audio.newMusic(Glean.y.files.music(name))
     new Music(Glean.y.audio, music)
   }

@@ -21,6 +21,8 @@
 
 package com.explatcreations.gleany.input
 
+import scala.collection.immutable.Iterable
+
 trait ButtonSpec
 
 case class AxisButton(code: Int, value: Int) extends ButtonSpec
@@ -48,7 +50,7 @@ object JoypadButton {
   ).toMap
 
   //todo -- make descriptive shortcuts
-  val All = Map map {
+  val All: Iterable[JoypadButton] = Map map {
     case (name, info) => new JoypadButton(name, info)
   }
 }

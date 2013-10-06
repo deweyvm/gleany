@@ -30,9 +30,7 @@ class Music(manager: AudioManager, music: audio.Music) extends AudioInstance(man
         music.play()
     }
 
-    override def isPlaying = {
-        music.isPlaying
-    }
+    override def isPlaying = music.isPlaying
 
     def setAdjustVolume(adjVol: Float) {
         adjVolume = adjVol
@@ -43,9 +41,7 @@ class Music(manager: AudioManager, music: audio.Music) extends AudioInstance(man
         music.setVolume(newVolume*adjVolume)
     }
 
-    override def stop() {
-
-    }
+    override def stop() { }
 
     override def pause() {
         music.pause()
@@ -54,7 +50,6 @@ class Music(manager: AudioManager, music: audio.Music) extends AudioInstance(man
     override def resume() {
         music.play()
     }
-
 
     setVolume(manager.settings.getMusicVolume)
     music.setLooping(true)

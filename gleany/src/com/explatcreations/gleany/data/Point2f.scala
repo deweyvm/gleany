@@ -41,7 +41,6 @@ case class Point2f(x: Float, y: Float) {
 
     def magnitude2 = x*x + y*y
 
-
     def map(f: Float => Float) = Point2f(f(x), f(y))
 
     def clamp(min: Point2f, max: Point2f) = Point2f(GleanyMath.clamp(x, min.x, max.x),

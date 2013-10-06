@@ -38,7 +38,6 @@ class JoypadWrapper(controller: Controller) {
         }
 
         override def buttonDown(controller: Controller, buttonCode: Int): Boolean = {
-
             buttonState(buttonCode) = true
             false
         }
@@ -50,11 +49,7 @@ class JoypadWrapper(controller: Controller) {
     }
     controller.addListener(listener)
 
-    def isButtonPressed(code: Int): Boolean = {
-        buttonState(code)
-    }
+    def isButtonPressed(code: Int): Boolean = buttonState(code)
 
-    def isAxisPressed(code: Int): Float = {
-        axisState(code)
-    }
+    def isAxisPressed(code: Int): Float = axisState(code)
 }

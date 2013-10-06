@@ -36,9 +36,8 @@ class Sfx(manager: AudioManager, sound: audio.Music, looped: Boolean) extends Au
         setVolume(manager.settings.getSfxVolume)
     }
 
-    override def isPlaying = {
-        sound.isPlaying
-    }
+    override def isPlaying = sound.isPlaying
+
 
     override def setVolume(newVolume: Float) {
         sound.setVolume(newVolume*adjVolume)

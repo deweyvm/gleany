@@ -39,18 +39,18 @@ class SettingUtils(controls: ControlNameCollection[ControlName], defaults: Setti
     import SettingUtils.scalaMapToJava
 
 
-    def makeNew = {
+    def makeNew =
         RawSettings.makeNew(scalaMapToJava(controls.makeKeyboardDefault),
                             scalaMapToJava(controls.makeJoypadDefault),
-                            defaults.WindowSize, //fixme get these from elsewhere
+                            defaults.WindowSize,
                             defaults.DisplayMode,
                             defaults.MusicVolume,
                             defaults.SfxVolume)
-    }
 
-    def verify(raw: RawSettings): RawSettings = {
+
+    def verify(raw: RawSettings): RawSettings =
         verify(raw, defaults.WindowSize)
-    }
+
 
     private def verifyMap[T](raw: RawSettings,
                              map: java.util.Map[String, T],

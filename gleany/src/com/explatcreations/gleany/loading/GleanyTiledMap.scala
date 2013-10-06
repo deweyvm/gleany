@@ -45,17 +45,14 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
     override val width = getWidth
     override val height = getHeight
 
-    override def getProperty(name: String): String = {
-        properties(name)
-    }
+    override def getProperty(name: String): String = properties(name)
 
-    override def getObjectLayer(name: String): Option[Seq[MapObject]] = {
-        objects.get(name)
-    }
 
-    override def getTileLayer(name: String): Array[Array[Int]] = {
-        layers(name)._3
-    }
+    override def getObjectLayer(name: String): Option[Seq[MapObject]] = objects.get(name)
+
+
+    override def getTileLayer(name: String): Array[Array[Int]] = layers(name)._3
+
 
     private def getFromLayer(getter: TileData => Int) = {
         if (layers.isEmpty) {
@@ -65,13 +62,9 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
         }
     }
 
-    private def getWidth = {
-        getFromLayer(_._1)
-    }
+    private def getWidth = getFromLayer(_._1)
 
-    private def getHeight = {
-        getFromLayer(_._2)
-    }
+    private def getHeight = getFromLayer(_._2)
 
     private def makeGidMap: Map[String, Int] = {
         val tilesetNodes = root.getChildrenByName("tileset")
@@ -162,12 +155,13 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
 
 
 object IllFormedMapException {
-    def getMessage(mapName: String, reason: String) = {
+    def getMessage(mapName: String, reason: String) =
         "Failed to load map \"%s\": %s" format (mapName, reason)
-    }
+
 }
 
-class IllFormedMapException(mapName: String, reason: String) extends RuntimeException(IllFormedMapException.getMessage(mapName, reason))
+class IllFormedMapException(mapName: String, reason: String)
+    extends RuntimeException(IllFormedMapException.getMessage(mapName, reason))
 
 case class MapObject(id: String, x: Int, y: Int)
 

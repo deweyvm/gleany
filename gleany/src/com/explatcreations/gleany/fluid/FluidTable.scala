@@ -29,11 +29,10 @@ class FluidTable(val cols: Int, val rows: Int, maxAdjacent: Int) {
     val emptyList = ArrayBuffer[Drop]()
 
 
-    def resetGrid = {
-        Array.tabulate(rows*cols) { i =>
-            new ArrayBuffer[Drop](maxAdjacent)
-        }
+    def resetGrid = Array.tabulate(rows*cols) { i =>
+        new ArrayBuffer[Drop](maxAdjacent)
     }
+
 
     def +=(drop: Drop) {
         particles += drop
@@ -77,7 +76,7 @@ class FluidTable(val cols: Int, val rows: Int, maxAdjacent: Int) {
 
     def rehash() {
         grid foreach {_.clear()}
-        particles foreach  {addInterRadius(_)}
+        particles foreach addInterRadius
     }
 
     def addInterRadius(drop: Drop) {
@@ -93,9 +92,8 @@ class FluidTable(val cols: Int, val rows: Int, maxAdjacent: Int) {
         }
     }
 
-    def inRange(x: Float, y: Float) = {
-        (x > 0 && x < cols && y > 0 && y < rows)
-    }
+    def inRange(x: Float, y: Float) = x > 0 && x < cols && y > 0 && y < rows
+
 
 
 }

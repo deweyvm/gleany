@@ -49,17 +49,11 @@ object Color {
         new Color(r, g, b, 1)
     }
 
-    def fromRgb(r: Float, g: Float, b: Float) = {
-        Color(r, g, b, 1)
-    }
+    def fromRgb(r: Float, g: Float, b: Float) = Color(r, g, b, 1)
 
-    def fromRgba(r: Float, g: Float, b: Float, a: Float) = {
-        Color(r, g, b, a)
-    }
+    def fromRgba(r: Float, g: Float, b: Float, a: Float) = Color(r, g, b, a)
 
-    def randomHue() = {
-        fromHsb(MathUtils.random(), 1, 1)
-    }
+    def randomHue() =  fromHsb(MathUtils.random(), 1, 1)
 
     def blend(c1: Color, c2: Color, prop: Float) = {
         val r = c1.r*prop + c2.r*(1 - prop)
@@ -70,10 +64,9 @@ object Color {
 }
 case class Color(r: Float, g: Float, b: Float, a: Float=1) {
     private val libgdxColor = new LibgdxColor(r, g, b, a)
+
     def toLibgdxColor = libgdxColor
 
+    def dim(factor: Float) = Color(r/factor, g/factor, b/factor)
 
-    def dim(factor: Float) = {
-        Color(r/factor, g/factor, b/factor)
-    }
 }

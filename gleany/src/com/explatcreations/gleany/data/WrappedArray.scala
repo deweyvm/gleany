@@ -29,7 +29,7 @@ object WrappedArray {
 class WrappedArray[T](seq: IndexedSeq[T], looped: Boolean) {
 
     val length = seq.length
-    if (seq.length == 0) {
+    if (length == 0) {
         throw new RuntimeException("WrappedArray must be nonempty")
     }
 

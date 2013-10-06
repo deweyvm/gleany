@@ -322,13 +322,9 @@ class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
         processAddParticles()
     }
 
-    def getScaleX = {
-        worldWidth / cols.toFloat
-    }
+    def getScaleX = worldWidth / cols.toFloat
 
-    def getScaleY = {
-        worldHeight / rows.toFloat
-    }
+    def getScaleY = worldHeight / rows.toFloat
 
     private def processAddParticles() {
         if (!Gdx.input.isTouched(0)

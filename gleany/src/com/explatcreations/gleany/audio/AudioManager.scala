@@ -63,8 +63,13 @@ class AudioManager(val settings: AudioSettings) {
     private val allAudio = ArrayBuffer[AudioInstance]()
 
 
-    def +=(audio: Sfx) { playingSfx += audio }
-    def +=(audio: Music) { playingMusic += audio }
+    def +=(audio: Sfx) {
+        playingSfx += audio
+    }
+
+    def +=(audio: Music) {
+        playingMusic += audio
+    }
 
 
     def register(audio: AudioInstance) {

@@ -22,8 +22,8 @@
 package com.explatcreations.gleany.data
 
 abstract class Pointer(max: Int) {
-    def increment()
-    def decrement()
+    def increment(): Unit
+    def decrement(): Unit
 
     protected var raw = 0
 

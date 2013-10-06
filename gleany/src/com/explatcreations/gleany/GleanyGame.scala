@@ -57,8 +57,8 @@ abstract class GleanyGame(initializer: GleanyInitializer) extends ApplicationLis
         Glean.y.audio.update()
     }
 
-    def update()
-    def draw()
+    def update(): Unit
+    def draw(): Unit
 
     override def create() {
         Gdx.app.setLogLevel(Application.LOG_NONE)

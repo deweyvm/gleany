@@ -23,10 +23,10 @@ package com.explatcreations.gleany.audio
 
 abstract class AudioInstance(manager: AudioManager) {
     manager.register(this)
-    def play()
+    def play(): Unit
     def isPlaying: Boolean
     def setVolume(newVolume: Float)
-    def stop()
-    def pause() 
-    def resume()
+    def stop(): Unit
+    def pause(): Unit
+    def resume(): Unit
 }

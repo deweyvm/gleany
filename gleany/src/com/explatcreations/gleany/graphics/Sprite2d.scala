@@ -26,7 +26,7 @@ import com.explatcreations.gleany.data.{Point2i, Point2f}
 trait Sprite2d {
     val width: Int
     val height: Int
-    def update()
+    def update(): Unit
     def draw(pos: Point2f) {
         draw(pos.x, pos.y)
     }

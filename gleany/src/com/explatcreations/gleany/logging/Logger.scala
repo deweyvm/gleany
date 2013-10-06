@@ -33,7 +33,7 @@ object Logger {
             return
         }
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler {
-            def uncaughtException(t : Thread, e: Throwable) {
+            def uncaughtException(t: Thread, e: Throwable) {
                 try {
                     val dateString: String = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date)
                     val filename: String = String.format("crash_log_%s.log", dateString)

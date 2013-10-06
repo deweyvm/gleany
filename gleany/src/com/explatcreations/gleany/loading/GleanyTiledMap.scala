@@ -83,8 +83,6 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
         pairs.toMap
     }
 
-    //private def parseObject(element:XmlReader.Element)
-
     private def makeObjects:Map[String, Seq[MapObject]] = {
         val groupsNodes = root.getChildrenByName("objectgroup")
         val objectPairs = groupsNodes.toArray map { e:XmlReader.Element =>
@@ -93,18 +91,20 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
             val objects = objectsNodes.toArray map { obj:XmlReader.Element =>
                 val x = obj.getInt("x")
                 val y = obj.getInt("y")
-                val `type` = obj.get("type")
+                val id = obj.getAttribute("name")//we store the id field in "name"
+                //ignored stuff
+                //val `type` = obj.get("type")//type ignored
                 //val width = obj.getInt("width")//width ignored
                 //val height = obj.getInt("height")//height ignored
-                val propertiesNode:XmlReader.Element = obj.getChildByName("properties")
+                /*val propertiesNode:XmlReader.Element = obj.getChildByName("properties")
                 val propertyNodes = propertiesNode.getChildrenByName("property")
                 val pairs = propertyNodes.toArray map { prop:XmlReader.Element =>
                     val name = prop.get("name")
                     val value = prop.get("value")
                     (name, value)
-                }
+                }*/
 
-                MapObject(`type`, x, y, pairs.toMap)
+                MapObject(id, x, y)
             } : Seq[MapObject]
             (name, objects)
         }
@@ -150,10 +150,7 @@ class GleanyTiledMap(mapName:String) extends ITiledMap {
         }).mkString("", "\n", "\n")
 
         def objToString(obj:MapObject) = {
-            val propertiesString = (obj.properties map { case (key, value) =>
-                "(%s -> %s)".format(key, value)
-            }).mkString(",")
-            "Object <type=%s> <x=%d> <y=%d> <properties=%s>".format(obj.`type`, obj.x, obj.y, propertiesString)
+            "Object <id=%s> <x=%d> <y=%d>".format(obj.id, obj.x, obj.y)
         }
         val objectsString = (objects map {case (name, objects) =>
             "Object Layer: " + name + "\n" +
@@ -172,5 +169,5 @@ object IllFormedMapException {
 
 class IllFormedMapException(mapName:String, reason:String) extends RuntimeException(IllFormedMapException.getMessage(mapName, reason))
 
-case class MapObject(`type`:String, x:Int, y:Int, properties:Map[String,String])
+case class MapObject(id:String, x:Int, y:Int)
 

@@ -23,6 +23,7 @@ package com.explatcreations.gleany.graphics
 
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.graphics.{Color=>LibgdxColor}
+import com.explatcreations.gleany.GleanyMath
 
 object Color {
     val Red = Color(1, 0, 0)
@@ -41,7 +42,7 @@ object Color {
     val Violet = Color(204/255f,0,125/255f)
     val Orange = Color(1, 0.78f, 0)
     def fromHsb(i: Float, saturation: Float=1f, brightness: Float=1f) = {
-        val hue = MathUtils.clamp(i, 0, 1)
+        val hue = GleanyMath.clamp(i, 0, 1)
         val hsv = java.awt.Color.getHSBColor(hue, saturation, brightness)
         val r = hsv.getRed/255f
         val b = hsv.getBlue/255f

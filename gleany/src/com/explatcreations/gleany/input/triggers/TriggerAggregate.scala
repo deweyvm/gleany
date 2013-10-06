@@ -21,7 +21,6 @@
 
 package com.explatcreations.gleany.input.triggers
 
-import com.badlogic.gdx.math.MathUtils
 import com.explatcreations.gleany.input.Control
 import com.explatcreations.gleany.GleanyMath
 

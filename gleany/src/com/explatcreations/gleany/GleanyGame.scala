@@ -23,10 +23,9 @@ package com.explatcreations.gleany
 
 import com.badlogic.gdx.{Application, Gdx, ApplicationListener}
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
-import com.explatcreations.gleany.saving.{Settings, VideoSettings, AudioSettings}
+import com.explatcreations.gleany.saving.Settings
 import com.explatcreations.gleany.files.{PathResolver, Files}
 import com.explatcreations.gleany.audio.AudioManager
-import com.explatcreations.gleany.loading.GleanyTiledMap
 
 object Glean {
     var y: Gleany = null

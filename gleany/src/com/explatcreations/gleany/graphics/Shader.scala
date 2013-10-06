@@ -22,7 +22,6 @@
 package com.explatcreations.gleany.graphics
 
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.math.Matrix4
 import com.explatcreations.gleany.{Glean, Debug}
 

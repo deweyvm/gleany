@@ -23,7 +23,7 @@ package com.explatcreations.gleany.saving
 
 import java.util
 import com.explatcreations.gleany.data.Point2i
-import com.badlogic.gdx.math.MathUtils
+import com.explatcreations.gleany.GleanyMath
 
 object SettingUtils {
     def scalaMapToJava[K,V](map: Map[K,V]): java.util.Map[K,V] = {
@@ -77,8 +77,8 @@ class SettingUtils(controls: ControlNameCollection[ControlName], defaults: Setti
         if (raw.height < windowSize.y) {
             raw.height = windowSize.y
         }
-        raw.sfxVolume = MathUtils.clamp(raw.sfxVolume, 0, 1)
-        raw.musicVolume = MathUtils.clamp(raw.musicVolume, 0, 1)
+        raw.sfxVolume = GleanyMath.clamp(raw.sfxVolume, 0, 1)
+        raw.musicVolume = GleanyMath.clamp(raw.musicVolume, 0, 1)
         if (raw.displayType < 0 || raw.displayType > 2) {
             raw.width = windowSize.x
             raw.height = windowSize.y

@@ -23,7 +23,7 @@ package com.explatcreations.gleany.fluid
 
 import collection.mutable.ArrayBuffer
 import com.badlogic.gdx.{Input, Gdx}
-import com.badlogic.gdx.math.MathUtils
+import com.explatcreations.gleany.GleanyMath
 
 /**
  * Viscoelastic fluid simulation.
@@ -188,8 +188,8 @@ class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
     private def capVelocity(drop: Drop) {
         val height = rows + 20f
         val vxMax = scala.math.abs(((height - drop.y)/height)*VelocityCap)
-        drop.vx = MathUtils.clamp(drop.vx, 0, vxMax)
-        drop.vy = MathUtils.clamp(drop.vy, -VelocityCap, VelocityCap)
+        drop.vx = GleanyMath.clamp(drop.vx, 0, vxMax)
+        drop.vy = GleanyMath.clamp(drop.vy, -VelocityCap, VelocityCap)
     }
 
     private def checkBounds(pi: Drop) {

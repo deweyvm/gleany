@@ -21,17 +21,17 @@
 
 package com.explatcreations.gleany.data
 
-import com.badlogic.gdx.math.MathUtils
+import com.explatcreations.gleany.GleanyMath
 
 class BoundedPointer(max: Int) extends Pointer(max) {
     protected var sign = 1
 
     override def increment() {
-        raw = MathUtils.clamp(raw + sign*1, 0, max - 1)
+        raw = GleanyMath.clamp(raw + sign*1, 0, max - 1)
     }
 
     override def decrement() {
-        raw = MathUtils.clamp(raw - sign*1, 0, max - 1)
+        raw = GleanyMath.clamp(raw - sign*1, 0, max - 1)
     }
 
     def isAtBeginning = raw <= 0

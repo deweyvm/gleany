@@ -22,7 +22,8 @@
 package com.explatcreations.gleany
 
 object GleanyMath {
-    def clamp[T](value: T, min: T, max: T)(implicit n: Numeric[T]) = {
+    //this is cute but cba with overhead here, often used in tight loops
+    /*def clamp[T](value: T, min: T, max: T)(implicit n: Numeric[T]) = {
         import n.{lt,gt}
         if (lt(value, min)) {
             min
@@ -31,5 +32,17 @@ object GleanyMath {
         } else {
             value
         }
+    }*/
+
+    def clamp(value: Float, min: Float, max: Float): Float = {
+        if (value < min) value
+        else if (value > max) max
+        else value
+    }
+
+    def clamp(value: Int, min: Int, max: Int): Int = {
+        if (value < min) value
+        else if (value > max) max
+        else value
     }
 }

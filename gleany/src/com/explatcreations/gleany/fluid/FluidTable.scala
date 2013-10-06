@@ -24,9 +24,9 @@ package com.explatcreations.gleany.fluid
 import collection.mutable.ArrayBuffer
 
 class FluidTable(val cols: Int, val rows: Int, maxAdjacent: Int) {
-  val particles = new ArrayBuffer[Drop](rows * cols)
-  var grid = resetGrid
-  val emptyList = ArrayBuffer[Drop]()
+  val particles: ArrayBuffer[Drop] = new ArrayBuffer[Drop](rows * cols)
+  var grid: Array[ArrayBuffer[Drop]] = resetGrid
+  val emptyList: ArrayBuffer[Drop] = ArrayBuffer[Drop]()
 
 
   def resetGrid = Array.tabulate(rows * cols) {
@@ -73,6 +73,7 @@ class FluidTable(val cols: Int, val rows: Int, maxAdjacent: Int) {
     if (inRange(x, y)) {
       grid(x * rows + y) += drop
     }
+    ()
   }
 
   def rehash() {
@@ -92,6 +93,7 @@ class FluidTable(val cols: Int, val rows: Int, maxAdjacent: Int) {
       if (inRange(x, y)) {
         grid(x * rows + y) += drop
       }
+      ()
     }
   }
 

@@ -71,9 +71,8 @@ class WrappedArray[T](seq: IndexedSeq[T], looped: Boolean) {
 
   def doSelected(func: (T, Boolean) => Unit) {
     val selected = get
-    foreach {
-      t =>
-        func(t, t == selected)
+    foreach { t =>
+      func(t, t == selected)
     }
   }
 

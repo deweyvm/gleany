@@ -35,27 +35,21 @@ class ActiveAudioCollection {
 
   def update() {
     if (!paused) {
-      playing = playing filter {
-        _.isPlaying
-      }
+      playing = playing filter { _.isPlaying }
     }
   }
 
   def pause() {
     if (!paused) {
       paused = true
-      playing foreach {
-        _.pause()
-      }
+      playing foreach { _.pause() }
     }
   }
 
   def resume() {
     if (paused) {
       paused = false
-      playing foreach {
-        _.resume()
-      }
+      playing foreach { _.resume() }
     }
   }
 }

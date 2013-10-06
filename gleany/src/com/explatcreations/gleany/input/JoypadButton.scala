@@ -32,7 +32,7 @@ case class FaceButton(code: Int) extends ButtonSpec
 object JoypadButton {
   def fromString(string: String): JoypadButton = new JoypadButton(string, Map(string))
 
-  val Map = List(
+  val Map: Map[String, ButtonSpec] = List(
     ("DPadUp", AxisButton(0, -1)),
     ("DPadDown", AxisButton(0, 1)),
     ("DPadLeft", AxisButton(1, -1)),

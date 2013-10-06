@@ -32,8 +32,7 @@ class Shader(vert: String, frag: String) {
   val shader:ShaderProgram = compileShader()
 
   private def compileShader() = {
-    val result = new ShaderProgram(Glean.y.files.shader(vert),
-      Glean.y.files.shader(frag))
+    val result = new ShaderProgram(Glean.y.files.shader(vert), Glean.y.files.shader(frag))
     val log = result.getLog
     //disallow any warnings
     if (   !result.isCompiled

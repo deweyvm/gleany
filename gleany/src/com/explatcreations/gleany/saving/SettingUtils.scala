@@ -36,9 +36,7 @@ object SettingUtils {
 }
 
 class SettingUtils(controls: ControlNameCollection[ControlName], defaults: SettingDefaults) {
-
   import SettingUtils.scalaMapToJava
-
 
   def makeNew: RawSettings =
     RawSettings.makeNew(scalaMapToJava(controls.makeKeyboardDefault),

@@ -27,11 +27,8 @@ import com.explatcreations.gleany.Glean
 trait ITiledMap {
   val width: Int
   val height: Int
-
   def getProperty(name: String): String
-
   def getObjectLayer(name: String): Option[Seq[MapObject]]
-
   def getTileLayer(name: String): Array[Array[Int]]
 }
 
@@ -50,9 +47,7 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
 
   override def getProperty(name: String): String = properties(name)
 
-
   override def getObjectLayer(name: String): Option[Seq[MapObject]] = objects.get(name)
-
 
   override def getTileLayer(name: String): Array[Array[Int]] = layers(name)._3
 

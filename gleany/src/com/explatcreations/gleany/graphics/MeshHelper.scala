@@ -31,9 +31,9 @@ object MeshHelper {
       new VertexAttribute(Usage.Position, 3, "a_position"),
       new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"))
     val vertices = Array[Float](-1f, -1f, 0, 0, 1,
-      1f, -1f, 0, 1, 1,
-      1f, 1f, 0, 1, 0,
-      -1f, 1f, 0, 0, 0)
+                                 1f, -1f, 0, 1, 1,
+                                 1f,  1f, 0, 1, 0,
+                                -1f,  1f, 0, 0, 0)
     mesh.setVertices(vertices)
     mesh
   }

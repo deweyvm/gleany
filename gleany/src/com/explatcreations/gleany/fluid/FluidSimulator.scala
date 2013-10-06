@@ -100,18 +100,17 @@ class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
   }
 
   private def applyForces() {
-    particles foreach {
-      drop =>
-        drop.vx = (drop.x - drop.xPrev) / Timestep
-        drop.vy = (drop.y - drop.yPrev) / Timestep
+    particles foreach { drop =>
+      drop.vx = (drop.x - drop.xPrev) / Timestep
+      drop.vy = (drop.y - drop.yPrev) / Timestep
 
-        applyGravity(drop)
-        wallCollision(drop)
-        attract(drop)
-        repulse(drop)
-        capVelocity(drop)
-        checkBounds(drop)
-        particles.updateGrid(drop)
+      applyGravity(drop)
+      wallCollision(drop)
+      attract(drop)
+      repulse(drop)
+      capVelocity(drop)
+      checkBounds(drop)
+      particles.updateGrid(drop)
     }
   }
 
@@ -196,7 +195,7 @@ class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
 
   private def checkBounds(pi: Drop) {
     val padding: Int = 20
-    if ((pi.x < -padding)
+    if (   (pi.x < -padding)
         || (pi.x > cols + padding)
         || (pi.y < -padding)
         || (pi.y > rows + padding)) {
@@ -217,34 +216,33 @@ class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
         val nearParticles = particles.getAdjacent(pi)
         val len = scala.math.min(nearParticles.length, MaxNeighbors)
 
-        (0 until len) foreach {
-          j: Int =>
-            val pj = nearParticles(j)
-            var q = dst2(pi, pj)
-            if (q < InteractionRadius2 && q != 0) {
-              q = scala.math.sqrt(q).toFloat
-              var rijx = (pj.x - pi.x) / q
-              var rijy = (pj.y - pi.y) / q
+        (0 until len) foreach { j: Int =>
+          val pj = nearParticles(j)
+          var q = dst2(pi, pj)
+          if (q < InteractionRadius2 && q != 0) {
+            q = scala.math.sqrt(q).toFloat
+            var rijx = (pj.x - pi.x) / q
+            var rijy = (pj.y - pi.y) / q
 
-              val dvx = (pi.vx - pj.vx) * rijx
-              val dvy = (pi.vy - pj.vy) * rijy
-              val u = dvx + dvy
+            val dvx = (pi.vx - pj.vx) * rijx
+            val dvy = (pi.vy - pj.vy) * rijy
+            val u = dvx + dvy
 
-              if (u > 0) {
-                q /= InteractionRadius
-                val I = (0.5f * Timestep * (1 - q)
-                    * (u * LinearViscosity
-                    + u * u * QuadraticViscosity))
-                rijx *= I
-                rijy *= I
+            if (u > 0) {
+              q /= InteractionRadius
+              val I = (0.5f * Timestep * (1 - q)
+                  * (u * LinearViscosity
+                  + u * u * QuadraticViscosity))
+              rijx *= I
+              rijy *= I
 
-                pi.vx -= rijx
-                pi.vy -= rijy
+              pi.vx -= rijx
+              pi.vy -= rijy
 
-                pj.vx += rijx
-                pj.vy += rijy
-              }
+              pj.vx += rijx
+              pj.vy += rijy
             }
+          }
         }
     }
   }
@@ -255,55 +253,52 @@ class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
     val d2 = new Array[Float](MaxNeighbors)
     val d = new Array[Float](MaxNeighbors)
 
-    particles foreach {
-      pi: Drop =>
-        pi.density = 0
-        pi.nearDensity = 0
-        val nearParticles = particles.getAdjacent(pi)
-        val len = scala.math.min(nearParticles.length, MaxNeighbors)
-        (0 until len) foreach {
-          j =>
-            var q = dst2(pi, nearParticles(j))
-            d2(j) = q
-            if (q < InteractionRadius2 && q != 0) {
-              q = scala.math.sqrt(q).toFloat
-              d(j) = q
-              q /= InteractionRadius
-              val qq = (1 - q) * (1 - q)
-              pi.density += qq
-              pi.nearDensity += qq * (1 - q)
-            }
+    particles foreach { pi: Drop =>
+      pi.density = 0
+      pi.nearDensity = 0
+      val nearParticles = particles.getAdjacent(pi)
+      val len = scala.math.min(nearParticles.length, MaxNeighbors)
+      (0 until len) foreach { j =>
+        var q = dst2(pi, nearParticles(j))
+        d2(j) = q
+        if (q < InteractionRadius2 && q != 0) {
+          q = scala.math.sqrt(q).toFloat
+          d(j) = q
+          q /= InteractionRadius
+          val qq = (1 - q) * (1 - q)
+          pi.density += qq
+          pi.nearDensity += qq * (1 - q)
         }
+      }
 
-        pi.pressure = Stiffness * (pi.density - RestDensity)
-        pi.nearPressure = NearStiffness * pi.nearDensity
-        var ddx = 0f
-        var ddy = 0f
-        (0 until len) foreach {
-          j =>
-            val pj = nearParticles(j)
-            var q = d2(j)
-            if (q < InteractionRadius2 && q != 0) {
-              q = d(j)
-              var rijx = (pj.x - pi.x) / q
-              var rijy = (pj.y - pi.y) / q
-              q /= InteractionRadius
+      pi.pressure = Stiffness * (pi.density - RestDensity)
+      pi.nearPressure = NearStiffness * pi.nearDensity
+      var ddx = 0f
+      var ddy = 0f
+      (0 until len) foreach { j =>
+        val pj = nearParticles(j)
+        var q = d2(j)
+        if (q < InteractionRadius2 && q != 0) {
+          q = d(j)
+          var rijx = (pj.x - pi.x) / q
+          var rijy = (pj.y - pi.y) / q
+          q /= InteractionRadius
 
-              val D = (0.5f
-                  * Timestep2
-                  * ((1 - q) * pi.pressure
-                  + (1 - q) * (1 - q) * pi.nearPressure))
-              rijx *= D
-              rijy *= D
+          val D = (0.5f
+              * Timestep2
+              * ((1 - q) * pi.pressure
+              + (1 - q) * (1 - q) * pi.nearPressure))
+          rijx *= D
+          rijy *= D
 
-              pj.x += rijx
-              pj.y += rijy
-              ddx -= rijx
-              ddy -= rijy
-            }
+          pj.x += rijx
+          pj.y += rijy
+          ddx -= rijx
+          ddy -= rijy
         }
-        pi.x += ddx
-        pi.y += ddy
+      }
+      pi.x += ddx
+      pi.y += ddy
     }
   }
 
@@ -337,7 +332,7 @@ class FluidSimulator(params: FluidParams, worldWidth: Int, worldHeight: Int) {
   def getScaleY: Float = worldHeight / rows.toFloat
 
   private def processAddParticles() {
-    if (!Gdx.input.isTouched(0)
+    if (   !Gdx.input.isTouched(0)
         || particles.length >= MaxSize - 1) {
       return
     }

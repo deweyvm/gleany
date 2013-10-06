@@ -23,10 +23,7 @@ package com.explatcreations.gleany.saving
 
 trait AudioSettings {
   def getSfxVolume: Float
-
   def getMusicVolume: Float
-
   def setSfxVolume(value: Float): Unit
-
   def setMusicVolume(value: Float): Unit
 }

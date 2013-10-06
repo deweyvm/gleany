@@ -29,9 +29,7 @@ import com.explatcreations.gleany.data.Recti
 import com.explatcreations.gleany.audio.{Music, Sfx}
 
 object AssetLoader {
-
   def loadTexture(name: String): Texture = new Texture(Glean.y.files.texture(name))
-
 
   def makeTextureRegion(texture: Texture, recti: Option[Recti] = None): TextureRegion = {
     val result = recti map {

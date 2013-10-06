@@ -25,14 +25,9 @@ abstract class AudioInstance(manager: AudioManager) {
   manager.register(this)
 
   def play(): Unit
-
   def isPlaying: Boolean
-
   def setVolume(newVolume: Float): Unit
-
   def stop(): Unit
-
   def pause(): Unit
-
   def resume(): Unit
 }

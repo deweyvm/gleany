@@ -33,10 +33,12 @@ object JoypadWrapper {
     abstract class Axis(val sign:Int, val code: Int)
     private[Axes] class Horizontal(sign: Int) extends Axis(sign, horizontalAxis)
     private[Axes] class Vertical(sign: Int) extends Axis(sign, verticalAxis)
+    private[Axes] class Zero extends Axis(0, 0)
     val Left: Axis = new Horizontal(1)
     val Right: Axis = new Horizontal(-1)
     val Up: Axis = new Vertical(-1)
     val Down: Axis = new Vertical(1)
+    val Zero: Axis = new Zero
   }
   def getAxisList(value: PovDirection): List[Axes.Axis] = {
     value match {
@@ -90,7 +92,7 @@ class JoypadWrapper(controller: Controller) {
     override def povMoved (controller: Controller, povIndex: Int, value: PovDirection): Boolean = {
       axisState.clear()
 
-      getAxisList(value) foreach { axis: JoypadWrapper.Axes.Axis =>
+      JoypadWrapper.getAxisList(value) foreach { axis: JoypadWrapper.Axes.Axis =>
         axisState(axis.code) = axis.sign
       }
       false

@@ -25,6 +25,7 @@ import com.explatcreations.gleany.GleanyMath
 
 object Point2f {
   val Zero: Point2f = Point2f(0, 0)
+  val UnitX: Point2f = Point2f(1, 0)
 }
 
 case class Point2f(x: Float, y: Float) {
@@ -57,6 +58,12 @@ case class Point2f(x: Float, y: Float) {
   def *(scale: Float): Point2f = Point2f(scale * x, scale * y)
 
   def /(scale: Float): Point2f = Point2f(x / scale, y / scale)
+
+  def rotate(angle: Float): Point2f = {
+    val sin = scala.math.sin(angle).asInstanceOf[Float]
+    val cos = scala.math.cos(angle).asInstanceOf[Float]
+    new Point2f(x * cos - y * sin, x * sin + y * cos)
+  }
 
   def unary_- : Point2f = Point2f(-x, -y)
 

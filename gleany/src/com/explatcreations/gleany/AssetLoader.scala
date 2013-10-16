@@ -32,9 +32,8 @@ object AssetLoader {
   def loadTexture(name: String): Texture = new Texture(Glean.y.files.texture(name))
 
   def makeTextureRegion(texture: Texture, recti: Option[Recti] = None): TextureRegion = {
-    val result = recti map {
-      r =>
-        new TextureRegion(texture, r.x, r.y, r.width, r.height)
+    val result = recti map { r =>
+      new TextureRegion(texture, r.x, r.y, r.width, r.height)
     } getOrElse new TextureRegion(texture)
     result.flip(false, true)
     result

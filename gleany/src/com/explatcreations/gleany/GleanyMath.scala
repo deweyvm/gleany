@@ -34,6 +34,8 @@ object GleanyMath {
     }
   }*/
 
+  val Tau: Float = (scala.math.Pi * 2).toFloat
+
   def clamp(value: Float, min: Float, max: Float): Float = {
     if (value < min) min
     else if (value > max) max

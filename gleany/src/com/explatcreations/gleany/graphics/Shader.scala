@@ -87,7 +87,7 @@ class Shader(vert: String, frag: String) {
     shader.end()
   }
 
-  def draw(mesh: Mesh, func: () => Unit) {
+  def draw(func: () => Unit) {
     begin()
     func()
     mesh.render(shader, GL10.GL_TRIANGLE_FAN)

@@ -53,10 +53,10 @@ class Fbo(val width: Int, val height: Int) {
     fbo.end()
   }
 
-  def drawSimple(shader: Shader, mesh: Mesh, func: () => Unit) {
+  def drawSimple(shader: Shader, func: () => Unit) {
     draw(func)
 
-    shader.draw(mesh, () => {
+    shader.draw(() => {
       texture.bind()
     })
 

@@ -4,9 +4,6 @@
 *.tmx
 out/
 bin/
-maps/
-lines.txt
-graph.py
 
 # sbt specific
 dist/*

@@ -56,9 +56,8 @@ class Fbo(val width: Int, val height: Int) {
   def drawSimple(shader: Shader, mesh: Mesh, func: () => Unit) {
     draw(func)
 
-    shader.draw(() => {
+    shader.draw(mesh, () => {
       texture.bind()
-      mesh.render(shader.shader, GL10.GL_TRIANGLE_FAN)
     })
 
   }

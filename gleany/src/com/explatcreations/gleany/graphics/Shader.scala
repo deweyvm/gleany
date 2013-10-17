@@ -24,11 +24,12 @@ package com.explatcreations.gleany.graphics
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.math.Matrix4
 import com.explatcreations.gleany.{Glean, Debug}
+import com.badlogic.gdx.graphics.{GL10, Mesh}
 
 
 class Shader(vert: String, frag: String) {
   private val actions = scala.collection.mutable.Map[String, () => Unit]()
-
+  private val mesh = MeshHelper.makeMesh
   val shader:ShaderProgram = compileShader()
 
   private def compileShader() = {
@@ -86,9 +87,10 @@ class Shader(vert: String, frag: String) {
     shader.end()
   }
 
-  def draw(func: () => Unit) {
+  def draw(mesh: Mesh, func: () => Unit) {
     begin()
     func()
+    mesh.render(shader, GL10.GL_TRIANGLE_FAN)
     end()
   }
 }

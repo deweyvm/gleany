@@ -38,7 +38,6 @@ object Fbo {
 }
 
 class Fbo(val width: Int, val height: Int) {
-
   import Fbo._
 
   private val fbo = makeFrameBuffer(Format.RGBA8888, width, height)

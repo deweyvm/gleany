@@ -24,8 +24,18 @@ package com.explatcreations.gleany.graphics
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.math.Matrix4
 import com.explatcreations.gleany.{Glean, Debug}
-import com.badlogic.gdx.graphics.{GL10, Mesh}
+import com.badlogic.gdx.graphics.{GL20, Texture, GL10, Mesh}
+import com.badlogic.gdx.Gdx
 
+object Shader {
+  def cleanupTextures(numTextures: Int) {
+    for (i <- 0 until numTextures) {
+      Gdx.gl.glActiveTexture(GL20.GL_TEXTURE1 + i)
+      Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, 0)
+    }
+    Gdx.gl.glActiveTexture(GL20.GL_TEXTURE0)
+  }
+}
 
 class Shader(vert: String, frag: String) {
   private val actions = scala.collection.mutable.Map[String, () => Unit]()
@@ -92,6 +102,19 @@ class Shader(vert: String, frag: String) {
     func()
     mesh.render(shader, GL10.GL_TRIANGLE_FAN)
     end()
+  }
+
+  def draw(binds:(Texture, Int)*) {
+    begin()
+    binds foreach { case (texture, index) =>
+      texture.bind(index)
+    }
+    mesh.render(shader, GL10.GL_TRIANGLE_FAN)
+    end()
+    if (binds.length > 0) {
+      Shader.cleanupTextures(binds.length)
+    }
+    ()
   }
 }
 

@@ -55,11 +55,7 @@ class Fbo(val width: Int, val height: Int) {
 
   def drawSimple(shader: Shader, func: () => Unit) {
     draw(func)
-
-    shader.draw(() => {
-      texture.bind()
-    })
-
+    shader.draw(texture -> 0)
   }
 
   def texture: Texture = fbo.getColorBufferTexture

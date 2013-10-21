@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.XmlReader
 import com.explatcreations.gleany.Glean
 
 trait ITiledMap {
+  val tilesetName: String
   val width: Int
   val height: Int
   def getProperty(name: String): String
@@ -37,10 +38,12 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
   private type TileData = (Int, Int, Array[Array[Int]])
   private val xml = new XmlReader()
   private val root = xml.parse(Glean.y.files.map(mapName))
-  private val gidMap = makeGidMap
+  private val (gidMap, tilesetMap) = makeTilesetMaps
   private val layers = makeLayers
   private val objects = makeObjects
   private val properties = makeProperties
+
+  override val tilesetName: String = tilesetMap("tiles")
 
   override val width: Int = getWidth
   override val height: Int = getHeight
@@ -50,6 +53,7 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
   override def getObjectLayer(name: String): Option[Seq[MapObject]] = objects.get(name)
 
   override def getTileLayer(name: String): Array[Array[Int]] = layers(name)._3
+
 
 
   private def getFromLayer(getter: TileData => Int) = {
@@ -64,21 +68,22 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
 
   private def getHeight = getFromLayer(_._2)
 
-  private def makeGidMap: Map[String, Int] = {
+  private def makeTilesetMaps: (Map[String, Int], Map[String, String]) = {
     val tilesetNodes = root.getChildrenByName("tileset")
-    val pairs = tilesetNodes.toArray map {
-      e: XmlReader.Element =>
+    val pairs = tilesetNodes.toArray map { e: XmlReader.Element =>
         val name = e.get("name")
         val firstGid = e.getInt("firstgid")
-        (name, firstGid)
+        val tileset = e.getChildByName("image").get("source")
+      ((name, firstGid), (name, tileset))
     }
-    pairs.toMap
+    val gids = pairs map {_._1}
+    val tiles = pairs map {_._2}
+    (gids.toMap, tiles.toMap)
   }
 
   private def makeObjects: Map[String, Seq[MapObject]] = {
     val groupsNodes = root.getChildrenByName("objectgroup")
-    val objectPairs = groupsNodes.toArray map {
-      e: XmlReader.Element =>
+    val objectPairs = groupsNodes.toArray map { e: XmlReader.Element =>
         val name = e.get("name")
         val objectsNodes = e.getChildrenByName("object")
         val objects = objectsNodes.toArray map {
@@ -108,8 +113,7 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
 
   private def makeLayers: Map[String, TileData] = {
     val layerNodes = root.getChildrenByName("layer")
-    val pairs = layerNodes.toArray map {
-      e: XmlReader.Element =>
+    val pairs = layerNodes.toArray map { e: XmlReader.Element =>
         val name = e.get("name")
         val width = e.getInt("width")
         val height = e.getInt("height")
@@ -121,8 +125,7 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
 
   private def makeProperties = {
     val propertyElement = root.getChildByName("properties")
-    val pairs = 0 until propertyElement.getChildCount map {
-      j: Int =>
+    val pairs = 0 until propertyElement.getChildCount map { j: Int =>
         val prop = propertyElement.getChild(j)
         val key = prop.get("name")
         val value = prop.get("value")

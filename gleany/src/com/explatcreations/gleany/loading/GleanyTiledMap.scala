@@ -38,10 +38,11 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
   private type TileData = (Int, Int, Array[Array[Int]])
   private val xml = new XmlReader()
   private val root = xml.parse(Glean.y.files.map(mapName))
-  private val (gidMap, tilesetMap) = makeTilesetMaps
-  private val layers = makeLayers
-  private val objects = makeObjects
-  private val properties = makeProperties
+  private val (gidMap: Map[String, Int], tilesetMap: Map[String, String]) = makeTilesetMaps
+  private val layers: Map[String, TileData] = makeLayers
+
+  private val objects: Map[String, Seq[MapObject]] = makeObjects
+  private val properties: Map[String, String] = makeProperties
 
   override val tilesetName: String = tilesetMap("tiles")
 
@@ -53,7 +54,6 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
   override def getObjectLayer(name: String): Option[Seq[MapObject]] = objects.get(name)
 
   override def getTileLayer(name: String): Array[Array[Int]] = layers(name)._3
-
 
 
   private def getFromLayer(getter: TileData => Int) = {
@@ -79,6 +79,11 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
     val gids = pairs map {_._1}
     val tiles = pairs map {_._2}
     (gids.toMap, tiles.toMap)
+  }
+
+  //hack
+  private def getFirstGid(name:String):Int = {
+    gidMap get name getOrElse gidMap("tiles")
   }
 
   private def makeObjects: Map[String, Seq[MapObject]] = {
@@ -117,7 +122,7 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
         val name = e.get("name")
         val width = e.getInt("width")
         val height = e.getInt("height")
-        val tiles: Array[Array[Int]] = parseCsv(gidMap(name), e.getChildByName("data").getText, width, height)
+        val tiles: Array[Array[Int]] = parseCsv(getFirstGid(name), e.getChildByName("data").getText, width, height)
         (name, (width, height, tiles))
     }
     pairs.toMap

@@ -21,7 +21,7 @@
 
 package com.explatcreations.gleany.graphics
 
-import com.badlogic.gdx.graphics.{Texture, Mesh, GL10}
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.Pixmap.Format
 import com.badlogic.gdx.graphics.Texture.{TextureWrap, TextureFilter}
 import com.badlogic.gdx.graphics.glutils.FrameBuffer

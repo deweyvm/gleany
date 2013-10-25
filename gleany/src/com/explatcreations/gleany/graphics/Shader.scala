@@ -87,6 +87,14 @@ class Shader(vert: String, frag: String) {
     makeAction(name, setter)
   }
 
+  def setFloat4(name: String, func: () => (Float, Float, Float, Float)) {
+    val setter = () => {
+      val (x, y, z, w) = func()
+      shader.setUniformf(name, x, y, z, w)
+    }
+    makeAction(name, setter)
+  }
+
 
   private def begin() {
     shader.begin()

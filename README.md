@@ -16,8 +16,8 @@ The library contains utilities to ease game making, such as:
 - Tiled map loading
 - streamlined input querying
 
-Gleany is in active development and is still in its early stages. 
-Feel free to use it, but expect many breaking changes!
+Gleany is in active development and is still in its early stages and is being 
+developed along side a TBA game.
 
 #### License
 

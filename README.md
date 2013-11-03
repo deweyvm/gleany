@@ -6,6 +6,8 @@ Gleany is game utility library written in Scala wrapping
 
 The library contains utilities to ease game making, such as:
 
+- simplified interface for creating and managing OpenGL shaders and offscreen buffers
+- less painful/rigid functions and semantics for drawing 2D sprites
 - crash reporting and hardware diagnostics
 - simple audio management and playback
 - resource loading

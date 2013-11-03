@@ -15,7 +15,7 @@ The library contains utilities to ease game making, such as:
 - streamlined input querying
 
 Gleany is in active development and is still in its early stages. 
-eel free to use it, but expect many breaking changes!
+Feel free to use it, but expect many breaking changes!
 
 #### License
 

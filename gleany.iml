@@ -16,20 +16,7 @@
     <orderEntry type="jdk" jdkName="1.6" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="scala-library" level="application" />
-    <orderEntry type="library" name="gdx-backend-lwjgl-natives" level="project" />
-    <orderEntry type="library" name="gdx-backend-lwjgl-sources" level="project" />
-    <orderEntry type="library" name="gdx-backend-lwjgl" level="project" />
-    <orderEntry type="library" name="gdx-controllers-desktop-natives" level="project" />
-    <orderEntry type="library" name="gdx-controllers-desktop-sources" level="project" />
-    <orderEntry type="library" name="gdx-controllers-desktop" level="project" />
-    <orderEntry type="library" name="gdx-controllers-sources" level="project" />
-    <orderEntry type="library" name="gdx-controllers" level="project" />
-    <orderEntry type="library" name="gdx-freetype-natives" level="project" />
-    <orderEntry type="library" name="gdx-freetype-sources" level="project" />
-    <orderEntry type="library" name="gdx-freetype" level="project" />
-    <orderEntry type="library" name="gdx-natives" level="project" />
-    <orderEntry type="library" name="gdx-sources" level="project" />
-    <orderEntry type="library" name="gdx" level="project" />
+    <orderEntry type="library" name="libs" level="project" />
   </component>
 </module>
 

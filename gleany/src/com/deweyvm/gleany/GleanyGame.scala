@@ -27,15 +27,8 @@ import com.deweyvm.gleany.saving.Settings
 import com.deweyvm.gleany.files.{PathResolver, Files}
 import com.deweyvm.gleany.audio.AudioManager
 
-object Glean {
-  var y: Gleany = null
-}
 
-class Gleany(resolver: PathResolver, val settings: Settings) {
-  val audio:AudioManager = new AudioManager(settings)
-  val files:Files = new Files(resolver)
 
-}
 
 object GleanyGame {
   def exit() {
@@ -43,7 +36,7 @@ object GleanyGame {
   }
 
   /**
-   * this function does not return
+   * this function does not return while the game is running
    */
   def runGame(config: GleanyConfig, game: GleanyGame) {
     new LwjglApplication(game, config.toLwjgl)
@@ -79,3 +72,4 @@ abstract class GleanyGame(initializer: GleanyInitializer) extends ApplicationLis
 
   override def resize(width: Int, height: Int) {}
 }
+

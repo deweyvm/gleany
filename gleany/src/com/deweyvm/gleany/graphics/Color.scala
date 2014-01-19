@@ -27,7 +27,7 @@ import com.deweyvm.gleany.GleanyMath
 
 object Color {
   val Red: Color = Color(1, 0, 0)
-  val Blue: Color = Color(1, 1, 0.01f)
+  val Blue: Color = Color(0, 0, 1)
   val Yellow: Color = Color(1, 1, 0.01f)
   val Pink: Color = Color(1, 0.68f, 0.68f)
   val Brown: Color = Color(0.58f, 0.29f, 0f)
@@ -40,7 +40,7 @@ object Color {
   val Teal: Color = Color(0, 0.5f, 0.5f)
   val White: Color = Color(1, 1, 1)
   val Violet: Color = Color(204 / 255f, 0, 125 / 255f)
-  val Orange: Color = Color(1, 0.78f, 0)
+  val Orange: Color = Color(1, 0.58f, 0)
 
   def fromHsb(i: Float, saturation: Float = 1f, brightness: Float = 1f): Color = {
     val hue = GleanyMath.clamp(i, 0, 1)

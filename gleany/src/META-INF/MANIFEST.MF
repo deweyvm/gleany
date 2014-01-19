@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Class-Path: gdx.jar gdx-natives.jar gdx-sources.jar gdx-freetype.jar g
+ dx-controllers.jar gdx-backend-lwjgl.jar gdx-freetype-natives.jar gdx
+ -freetype-sources.jar gdx-controllers-desktop.jar gdx-controllers-sou
+ rces.jar gdx-backend-lwjgl-natives.jar gdx-backend-lwjgl-sources.jar 
+ gdx-controllers-desktop-natives.jar gdx-controllers-desktop-sources.j
+ ar scala-compiler.jar scala-library.jar scala-reflect.jar scala-actor
+ s.jar scala-library.jar scala-swing.jar scala-library.jar
+Main-Class: com.deweyvm.whatever.Main
+

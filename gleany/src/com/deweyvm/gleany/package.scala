@@ -21,13 +21,17 @@
 
 package com.deweyvm
 
-import com.deweyvm.gleany.data.{EnrichedString, EnrichedOption}
-
-
+import com.deweyvm.gleany.data.{EnrichedFunction2, EnrichedString, EnrichedOption}
+import scala.language.implicitConversions
 
 package object gleany {
   object Implicits {
-    implicit def any2Option[A](x: A): EnrichedOption[A] = new EnrichedOption(x)
+    implicit def any2Option[A](x: A):EnrichedOption[A] = new EnrichedOption(x)
     implicit def string2EnrichedString(x:String):EnrichedString = new EnrichedString(x)
+  }
+  object Functions {
+    implicit def function22EnrichedFunction2[A,B](f:A=>B):EnrichedFunction2[A,B] = new EnrichedFunction2(f)
+
+
   }
 }

@@ -19,19 +19,9 @@
  * If not, see <http://www.gnu.org/licenses/>.
  *****************************************************************************/
 
-package com.deweyvm.gleany
+package com.deweyvm.gleany.data
 
-import com.deweyvm.gleany.files.{Files, PathResolver}
-import com.deweyvm.gleany.saving.Settings
-import com.deweyvm.gleany.audio.AudioManager
-
-object Glean {
-  var y: Gleany = null
-}
-
-
-class Gleany(resolver: PathResolver, val settings: Settings) {
-  val audio:AudioManager = new AudioManager(settings)
-  val files:Files = new Files(resolver)
-
+class EnrichedOption[+T](self:T) {
+  def some:Option[T] = Some(self)
+  def none:Option[T] = None
 }

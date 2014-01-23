@@ -28,7 +28,7 @@ import java.util.Date
 import java.io.{PrintStream, File}
 
 object Logger {
-  def attachCrasher(isDebug: Boolean) {
+  def attachCrasher(isDebug: Boolean, root:String=".") {
     if (isDebug) {
       return
     }
@@ -37,7 +37,7 @@ object Logger {
         try {
           val dateString: String = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date)
           val filename: String = String.format("crash_log_%s.log", dateString)
-          val file: File = new File(filename)
+          val file: File = new File(root + "/" + filename)
           file.createNewFile
           val stream: PrintStream = new PrintStream(file)
           e.printStackTrace(stream)

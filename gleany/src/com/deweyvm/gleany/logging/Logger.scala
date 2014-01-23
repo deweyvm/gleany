@@ -21,35 +21,36 @@
 
 package com.deweyvm.gleany.logging
 
-import java.lang.String
-import scala.Predef.String
-import java.text.SimpleDateFormat
-import java.util.Date
+
 import java.io.{PrintStream, File}
+import com.deweyvm.gleany.data.Time
 
 object Logger {
-  def attachCrasher(isDebug: Boolean, root:String=".") {
-    if (isDebug) {
-      return
-    }
+  def attachCrasher(root:String) {
     Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler {
       def uncaughtException(t: Thread, e: Throwable) {
-        try {
-          val dateString: String = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date)
-          val filename: String = String.format("crash_log_%s.log", dateString)
-          val file: File = new File(root + "/" + filename)
-          file.createNewFile
-          val stream: PrintStream = new PrintStream(file)
-          e.printStackTrace(stream)
-          stream.close()
-        } catch {
-          case throwable: Throwable => {
-            e.printStackTrace()
-            throwable.printStackTrace()
-          }
-        }
+        writeCrashToFile(root, e)
+        //let the program crash anyway
+        System.err.print("Exception in thread \"" + t.getName + "\" ")
+        e.printStackTrace(System.err)
       }
     })
+  }
+
+  private def writeCrashToFile(root:String, e:Throwable) {
+    try {
+      val filename: String = String.format("crash_%s", Time.getString)
+      val file: File = new File(root + "/" + filename)
+      file.createNewFile
+      val stream: PrintStream = new PrintStream(file)
+      e.printStackTrace(stream)
+      stream.close()
+    } catch {
+      case t: Throwable => {
+        System.err.print("Exception in thread \"" + Thread.currentThread.getName + "\" ")
+        t.printStackTrace()
+      }
+    }
   }
 }
 

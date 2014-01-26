@@ -21,9 +21,11 @@
 
 package com.deweyvm.gleany.data
 
-import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.{Calendar, TimeZone}
 
 object Time {
-  def getString:String = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date)
+  def getString:String = {
+    val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+    (calendar.getTimeInMillis / 1000L).toString
+  }
 }

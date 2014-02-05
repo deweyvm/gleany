@@ -25,7 +25,11 @@ import java.util.{Calendar, TimeZone}
 
 object Time {
   def getString:String = {
+    epochTime.toString
+  }
+
+  def epochTime:Int = {
     val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-    (calendar.getTimeInMillis / 1000L).toString
+    (calendar.getTimeInMillis / 1000L).toInt
   }
 }

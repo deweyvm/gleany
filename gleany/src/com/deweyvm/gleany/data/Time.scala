@@ -21,7 +21,7 @@
 
 package com.deweyvm.gleany.data
 
-import java.util.{Calendar, TimeZone}
+import java.util.{Date, Calendar, TimeZone}
 
 object Time {
   def getString:String = {
@@ -31,5 +31,10 @@ object Time {
   def epochTime:Int = {
     val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
     (calendar.getTimeInMillis / 1000L).toInt
+  }
+
+  def epochToDate(epoch:Int):String = {
+    val millis:Long = epoch.toLong * 1000L
+    new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(millis))
   }
 }

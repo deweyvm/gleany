@@ -46,7 +46,7 @@ object Logger {
       e.printStackTrace(stream)
       stream.close()
     } catch {
-      case t: Throwable => {
+      case t: Exception => {
         System.err.print("Exception in thread \"" + Thread.currentThread.getName + "\" ")
         t.printStackTrace()
       }

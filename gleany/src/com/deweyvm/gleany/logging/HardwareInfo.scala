@@ -52,7 +52,7 @@ class HardwareInfo {
       val result = seq.lines.fold("")((a: String, b: String) => a + b)
       result
     } catch {
-      case t: Throwable => {
+      case t: Exception => {
         t.printStackTrace()
         "Failure "
       }

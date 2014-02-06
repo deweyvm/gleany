@@ -68,7 +68,7 @@ object LoadUtils {
         val path = Directory + "/" + name
         json.fromJson(cl, loadFile(path)).asInstanceOf[T]
       } catch {
-        case e: Throwable => {
+        case e: Exception => {
           Debug.error(e.getMessage)
           val result = makeNew()
           flush(result, name)

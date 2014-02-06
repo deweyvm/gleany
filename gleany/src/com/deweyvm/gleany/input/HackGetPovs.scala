@@ -10,7 +10,7 @@ object HackGetPovs {
       val numPovs = method.invoke(controller, ControlType.pov).asInstanceOf[Int]
       numPovs
     } catch {
-      case nsm:Throwable =>
+      case nsm:Exception =>
         Debug.debug(nsm.getMessage)
         0
     }

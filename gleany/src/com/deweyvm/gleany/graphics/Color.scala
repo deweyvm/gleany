@@ -36,6 +36,7 @@ object Color {
   val Grey: Color = Color(0.7f, 0.7f, 0.7f)
   val DarkGrey: Color = Color(0.3f, 0.3f, 0.3f)
   val Green: Color = Color(0, 1, 0)
+  val DarkGreen: Color = Color(0, 0.5f, 0)
   val Purple: Color = Color(202 / 256f, 0, 140 / 256f)
   val Teal: Color = Color(0, 0.5f, 0.5f)
   val White: Color = Color(1, 1, 1)

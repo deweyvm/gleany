@@ -28,7 +28,7 @@ object Point2f {
   val UnitX: Point2f = Point2f(1, 0)
 }
 
-case class Point2f(x: Float, y: Float) {
+@deprecated case class Point2f(x: Float, y: Float) {
   def normalize: Point2f = {
     val mag = magnitude
     if (mag == 0) {

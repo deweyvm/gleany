@@ -64,12 +64,14 @@ object Color {
     val b = c1.b * prop + c2.b * (1 - prop)
     Color(r, g, b, 1)
   }
+
 }
 
 case class Color(r: Float, g: Float, b: Float, a: Float = 1) {
   private val libgdxColor = new LibgdxColor(r, g, b, a)
 
   def toLibgdxColor: LibgdxColor = libgdxColor
+  def toByteTuple:(Int,Int,Int) = ((r*255).toInt,(g*255).toInt,(b*255).toInt)
 
   def dim(factor: Float): Color = Color(r / factor, g / factor, b / factor)
 

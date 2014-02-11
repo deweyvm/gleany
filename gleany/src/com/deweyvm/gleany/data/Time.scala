@@ -37,4 +37,10 @@ object Time {
     val millis:Long = epoch.toLong * 1000L
     new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(millis))
   }
+
+  def timer[T](f:() => T):(T, Long) = {
+    val before = System.nanoTime
+    val result = f()
+    (result, System.nanoTime - before)
+  }
 }

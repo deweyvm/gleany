@@ -42,6 +42,8 @@ case class Point2d(x: Double, y: Double) {
 
   def magnitude2: Double = x * x + y * y
 
+  def dot(other:Point2d) = other.x*x + other.y*y
+
   def map(f: Double => Double): Point2d = Point2d(f(x), f(y))
 
   def clamp(min: Point2d, max: Point2d):Point2d =
@@ -70,4 +72,6 @@ case class Point2d(x: Double, y: Double) {
   def toTuple: (Double, Double) = (x, y)
 
   def toPoint2i: Point2i = Point2i(x.toInt, y.toInt)
+
+  def to3 = Point3d(x, y, 0)
 }

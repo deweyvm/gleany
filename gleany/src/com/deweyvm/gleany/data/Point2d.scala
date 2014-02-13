@@ -74,4 +74,6 @@ case class Point2d(x: Double, y: Double) {
   def toPoint2i: Point2i = Point2i(x.toInt, y.toInt)
 
   def to3 = Point3d(x, y, 0)
+
+  override def toString = "Point2d(%.2f,%.2f)" format (x, y)
 }

@@ -62,7 +62,6 @@ object ImageUtils {
 
       val region = (c*10).toInt
       val color = if (region <= 0) {
-        //println(scala.math.abs(region - 2)/10f)
         Color.Blue.dim(1/(1 - scala.math.abs(region - 2)/10f))
       } else if (region == 1) {
         Color.Yellow

@@ -47,6 +47,7 @@ case class Recti(x: Int, y: Int, width: Int, height: Int) {
     Recti(x + other.x, y + other.y, width + other.width, height + other.height)
 
   def toRectf: Rectf = Rectf(x, y, width, height)
+  def toRectd: Rectd = Rectd(x, y, width, height)
 
   override def toString: String = "(%d,%d,%d,%d)" format(x, y, width, height)
 }

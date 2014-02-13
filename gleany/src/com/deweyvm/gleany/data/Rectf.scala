@@ -22,7 +22,7 @@
 package com.deweyvm.gleany.data
 
 
-case class Rectf(x: Float, y: Float, width: Float, height: Float) {
+@deprecated case class Rectf(x: Float, y: Float, width: Float, height: Float) {
   lazy val right: Float = x + width - 1
   lazy val bottom: Float = y + height - 1
   lazy val center: Point2f = Point2f(x + width / 2, y + height / 2)

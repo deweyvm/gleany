@@ -21,20 +21,26 @@
 
 package com.deweyvm.gleany.data
 
-import java.util.{Date, Calendar, TimeZone}
+object Timer {
 
-object Time {
-  def getString:String = {
-    epochTime.toString
+
+  def timer[T](f:() => T):(T, Long) = {
+    val before = System.nanoTime
+    val result = f()
+    (result, System.nanoTime - before)
   }
 
-  def epochTime:Int = {
-    val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-    (calendar.getTimeInMillis / 1000L).toInt
+  def printMillis[T](f:() => T):T = {
+    val before = System.nanoTime
+    val result = f()
+    println((System.nanoTime - before)/1000000L + " ms")
+    result
   }
 
-  def epochToDate(epoch:Int):String = {
-    val millis:Long = epoch.toLong * 1000L
-    new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(millis))
+  def printNanos[T](f:() => T):T = {
+    val before = System.nanoTime
+    val result = f()
+    println((System.nanoTime - before) + " ns")
+    result
   }
 }

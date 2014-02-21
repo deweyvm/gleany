@@ -31,9 +31,13 @@ object Timer {
   }
 
   def printMillis[T](f:() => T):T = {
+    printMillisString("", f)
+  }
+
+  def printMillisString[T](s:String, f:() => T):T = {
     val before = System.nanoTime
     val result = f()
-    println((System.nanoTime - before)/1000000L + " ms")
+    println(s + (System.nanoTime - before)/1000000L + " ms")
     result
   }
 

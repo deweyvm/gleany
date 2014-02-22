@@ -26,7 +26,7 @@ import com.deweyvm.gleany.utils.PNG
 import java.io.{FileOutputStream, File}
 
 object ImageUtils {
-  private def rangeToGreyscale(r:Double) = (r + 1.0)/2.0// - 0.2
+  private def rangeToGreyscale(r:Double) = (r + 1.0)/2.0 //- 0.2
 
   private def savePixmap(pixmap:Pixmap, filename:String, width:Int, height:Int) {
     val bytes = PNG.write(pixmap)
@@ -36,7 +36,10 @@ object ImageUtils {
     stream.close()
   }
 
-  def saveGrayscale(a:Vector[Double], cols:Int, rows:Int, filename:String) {
+
+  def useGreyscale[T](a:Vector[Double], cols:Int, rows:Int, f:Pixmap => T):T =  {
+    def rangeToGreyscale(r:Double) = (r + 1.0)/2.0 - 0.2
+
     val pixmap = new Pixmap(cols, rows, Pixmap.Format.RGBA8888)
     for (i <- 0 until a.size) {
       val x = i % cols
@@ -46,12 +49,17 @@ object ImageUtils {
       pixmap.setColor(color.toLibgdxColor)
       pixmap.drawPixel(x, y)
     }
-    savePixmap(pixmap, filename, cols, rows)
+    val result = f(pixmap)
     pixmap.dispose()
+    result
   }
 
-  def makeTexture(a:Vector[Double], cols:Int, rows:Int) =
+  def makePrettyTexture(a:Vector[Double], cols:Int, rows:Int) =
     makePixmap[Texture](a, cols, rows, (p:Pixmap) => new Texture(p))
+
+  def makeGreyscaleTexture(a:Vector[Double], cols:Int, rows:Int) =
+    useGreyscale[Texture](a, cols, rows, (p:Pixmap) => new Texture(p))
+
 
   def makePixmap[T](a:Vector[Double], cols:Int, rows:Int, f:Pixmap => T):T = {
     val pixmap = new Pixmap(cols, rows, Pixmap.Format.RGBA8888)

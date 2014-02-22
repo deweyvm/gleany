@@ -59,6 +59,13 @@ case class GleanyConfig(
         config.width = size.x
         config.height = size.y
         config.fullscreen = false
+      case Display.BorderlessWindow =>
+        val size = settings.getWindowSize
+        config.width = size.x
+        config.height = size.y
+        config.resizable = false
+        System.setProperty("org.lwjgl.opengl.Window.undecorated", "true")
+        config.fullscreen = false
     }
     config
   }

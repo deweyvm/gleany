@@ -38,13 +38,14 @@ object SettingUtils {
 class SettingUtils(controls: ControlNameCollection[ControlName], defaults: SettingDefaults) {
   import SettingUtils.scalaMapToJava
 
-  def makeNew: RawSettings =
+  def makeNew: RawSettings = {
     RawSettings.makeNew(scalaMapToJava(controls.makeKeyboardDefault),
       scalaMapToJava(controls.makeJoypadDefault),
       defaults.WindowSize,
       defaults.DisplayMode,
       defaults.MusicVolume,
       defaults.SfxVolume)
+  }
 
 
   def verify(raw: RawSettings): RawSettings =
@@ -78,7 +79,7 @@ class SettingUtils(controls: ControlNameCollection[ControlName], defaults: Setti
     }
     raw.sfxVolume = GleanyMath.clamp(raw.sfxVolume, 0, 1)
     raw.musicVolume = GleanyMath.clamp(raw.musicVolume, 0, 1)
-    if (raw.displayType < 0 || raw.displayType > 2) {
+    if (raw.displayType < 0 || raw.displayType > 3) {
       raw.width = windowSize.x
       raw.height = windowSize.y
       raw.displayType = 0

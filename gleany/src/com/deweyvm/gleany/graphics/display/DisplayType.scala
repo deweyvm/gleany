@@ -34,11 +34,12 @@ abstract class DisplayType(id: Int) {
 }
 
 object Display {
-  val All: IndexedSeq[DisplayType] = Vector(Windowed, Fullscreen, WindowedFullscreen)
+  val All: IndexedSeq[DisplayType] = Vector(Windowed, Fullscreen, WindowedFullscreen, BorderlessWindow)
 
   case object Windowed extends DisplayType(0)
   case object Fullscreen extends DisplayType(1)
   case object WindowedFullscreen extends DisplayType(2)
+  case object BorderlessWindow extends DisplayType(3)
 
   def setDisplayMode(mode: DisplayType, defaultWindowSize: Point2i) {
     mode match {
@@ -54,6 +55,10 @@ object Display {
         System.setProperty("org.lwjgl.opengl.Window.undecorated", "true")
         LwjglDisplay.setResizable(false)
         Gdx.graphics.setDisplayMode(desktopMode.width, desktopMode.height, false)
+      case BorderlessWindow =>
+        System.setProperty("org.lwjgl.opengl.Window.undecorated", "true")
+        LwjglDisplay.setResizable(false)
+        Gdx.graphics.setDisplayMode(defaultWindowSize.x, defaultWindowSize.y, false)
     }
 
   }

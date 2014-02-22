@@ -28,6 +28,7 @@ import com.deweyvm.gleany.GleanyMath
 object Color {
   val Red: Color = Color(1, 0, 0)
   val Blue: Color = Color(0, 0, 1)
+  val Cyan: Color = Color(0, 1, 1)
   val Yellow: Color = Color(1, 1, 0.01f)
   val Pink: Color = Color(1, 0.68f, 0.68f)
   val Brown: Color = Color(0.58f, 0.29f, 0f)

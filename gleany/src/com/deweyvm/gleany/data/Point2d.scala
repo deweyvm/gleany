@@ -22,6 +22,7 @@
 package com.deweyvm.gleany.data
 
 import com.deweyvm.gleany.GleanyMath
+import com.badlogic.gdx.math.MathUtils
 
 object Point2d {
   val Zero: Point2d = Point2d(0, 0)
@@ -38,7 +39,9 @@ case class Point2d(x: Double, y: Double) {
     }
   }
 
-  def magnitude: Double = scala.math.sqrt(x * x + y * y)
+  def angle: Double = MathUtils.atan2(y.toFloat, x.toFloat)
+
+  def magnitude: Double = math.sqrt(x * x + y * y)
 
   def magnitude2: Double = x * x + y * y
 
@@ -62,8 +65,8 @@ case class Point2d(x: Double, y: Double) {
   def /(scale: Double): Point2d = Point2d(x / scale, y / scale)
 
   def rotate(angle: Double): Point2d = {
-    val sin = scala.math.sin(angle)
-    val cos = scala.math.cos(angle)
+    val sin = math.sin(angle)
+    val cos = math.cos(angle)
     new Point2d(x * cos - y * sin, x * sin + y * cos)
   }
 

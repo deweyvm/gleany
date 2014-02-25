@@ -25,6 +25,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import com.deweyvm.gleany.graphics.display.Display
 import com.deweyvm.gleany.saving.{AudioSettings, VideoSettings}
 import com.badlogic.gdx.Files
+import com.deweyvm.gleany.data.Point2i
 
 
 case class GleanyConfig(
@@ -32,6 +33,17 @@ case class GleanyConfig(
     title: String = "GleanyGame",
     iconPath: Option[String] = None) {
   def toLwjgl: LwjglApplicationConfiguration = lwjglConfig
+
+  def getScreenSize:Point2i = {
+    try {
+      val desktopSize = java.awt.Toolkit.getDefaultToolkit.getScreenSize
+      Point2i(desktopSize.width, desktopSize.height)
+    } catch {
+      case head:java.awt.HeadlessException =>
+        Point2i(1920,1080)
+    }
+  }
+
 
   private val lwjglConfig = {
     val config = new LwjglApplicationConfiguration
@@ -42,15 +54,15 @@ case class GleanyConfig(
       path =>
         config.addIcon(path, Files.FileType.Internal)
     }
-    val desktopSize = java.awt.Toolkit.getDefaultToolkit.getScreenSize
+    val desktopSize = getScreenSize
     settings.getDisplayType match {
       case Display.Fullscreen =>
-        config.width = desktopSize.width
-        config.height = desktopSize.height
+        config.width = desktopSize.x
+        config.height = desktopSize.y
         config.fullscreen = true
       case Display.WindowedFullscreen =>
-        config.width = desktopSize.width
-        config.height = desktopSize.height
+        config.width = desktopSize.x
+        config.height = desktopSize.y
         config.resizable = false
         System.setProperty("org.lwjgl.opengl.Window.undecorated", "true")
         config.fullscreen = false

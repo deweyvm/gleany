@@ -42,9 +42,13 @@ object Timer {
   }
 
   def printNanos[T](f:() => T):T = {
+    printNanosString("", f)
+  }
+
+  def printNanosString[T](s:String, f:() => T):T = {
     val before = System.nanoTime
     val result = f()
-    println((System.nanoTime - before) + " ns")
+    println(s + (System.nanoTime - before) + " ns")
     result
   }
 }

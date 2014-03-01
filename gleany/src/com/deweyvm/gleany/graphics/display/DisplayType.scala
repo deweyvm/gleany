@@ -62,4 +62,9 @@ object Display {
     }
 
   }
+
+  def resize(dx:Int, dy:Int) {
+    val (x, y) = (Gdx.graphics.getWidth, Gdx.graphics.getHeight)
+    Gdx.graphics.setDisplayMode(x+dx, y + dy, Gdx.graphics.isFullscreen)
+  }
 }

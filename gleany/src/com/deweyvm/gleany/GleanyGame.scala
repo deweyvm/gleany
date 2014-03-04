@@ -23,11 +23,6 @@ package com.deweyvm.gleany
 
 import com.badlogic.gdx.{Application, Gdx, ApplicationListener}
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
-import com.deweyvm.gleany.saving.Settings
-import com.deweyvm.gleany.files.{PathResolver, Files}
-import com.deweyvm.gleany.audio.AudioManager
-
-
 
 
 object GleanyGame {

@@ -49,7 +49,7 @@ case class Point2i(x: Int, y: Int) {
 
   def toPoint2f: Point2f = new Point2f(x, y)
 
-  def toTuple: (Float, Float) = (x, y)
+  def toTuple: (Int, Int) = (x, y)
 
   override def toString: String = "(%d,%d)".format(x, y)
 }

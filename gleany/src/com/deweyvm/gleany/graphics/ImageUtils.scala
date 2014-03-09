@@ -26,7 +26,10 @@ import com.deweyvm.gleany.utils.PNG
 import java.io.{FileOutputStream, File}
 
 object ImageUtils {
-  private def rangeToGreyscale(r:Double) = (r + 1.0)/2.0 //- 0.2
+  def rangeToGreyscale(r:Double):Color = {
+    val c = ((r + 1.0)/2.0 - 0.2).toFloat
+    new Color(c, c, c, 1)
+  }
 
   private def savePixmap(pixmap:Pixmap, filename:String, width:Int, height:Int) {
     val bytes = PNG.write(pixmap)
@@ -36,64 +39,25 @@ object ImageUtils {
     stream.close()
   }
 
-
-  def useGreyscale[T](a:Vector[Double], cols:Int, rows:Int, f:Pixmap => T):T =  {
-    def rangeToGreyscale(r:Double) = (r + 1.0)/2.0 - 0.2
-
+  def printColor[T, K](a:Vector[K], f:K => Color, cols:Int, rows:Int, process:Pixmap => T):T =  {
     val pixmap = new Pixmap(cols, rows, Pixmap.Format.RGBA8888)
     for (i <- 0 until a.size) {
       val x = i % cols
       val y = i / cols
-      val c = rangeToGreyscale(a(i)).toFloat
-      val color = new Color(c, c, c, 1)
+      val color = f(a(i))
+
       pixmap.setColor(color.toLibgdxColor)
       pixmap.drawPixel(x, y)
     }
-    val result = f(pixmap)
+    val result = process(pixmap)
     pixmap.dispose()
     result
   }
-
-  def makePrettyTexture(a:Vector[Double], cols:Int, rows:Int) =
-    makePixmap[Texture](a, cols, rows, (p:Pixmap) => new Texture(p))
 
   def makeGreyscaleTexture(a:Vector[Double], cols:Int, rows:Int) =
-    useGreyscale[Texture](a, cols, rows, (p:Pixmap) => new Texture(p))
+    printColor(a, rangeToGreyscale, cols, rows, (p:Pixmap) => new Texture(p))
 
+  def makeColorTexture(a:Vector[Color], cols:Int, rows:Int) =
+    printColor[Texture, Color](a, x => x, cols, rows, (p:Pixmap) => new Texture(p))
 
-  def makePixmap[T](a:Vector[Double], cols:Int, rows:Int, f:Pixmap => T):T = {
-    val pixmap = new Pixmap(cols, rows, Pixmap.Format.RGBA8888)
-    for (i <- 0 until a.size) {
-      val x = i % cols
-      val y = i / cols
-      val c = a(i).toFloat
-
-      val region = (c*10).toInt
-      val color = if (region <= 0) {
-        Color.Blue.dim(1/(1 - scala.math.abs(region - 2)/10f))
-      } else if (region == 1) {
-        Color.Yellow
-      } else if (region == 2) {
-        Color.Green
-      } else if (region <= 5) {
-        Color.DarkGreen
-      } else if (region == 6) {
-        Color.DarkGrey
-      } else if (region == 7) {
-        Color.Grey
-      } else if (region > 7){
-        Color.White
-      } else {
-        throw new Exception("impossible " + region)
-      }
-      pixmap.setColor(color.toLibgdxColor)
-      pixmap.drawPixel(x, y)
-    }
-    val result = f(pixmap)
-    pixmap.dispose()
-    result
-  }
-
-  def saveHeight(a:Vector[Double], cols:Int, rows:Int, filename:String) =
-    makePixmap(a, cols, rows, (p:Pixmap) => savePixmap(p, filename, cols, rows))
 }

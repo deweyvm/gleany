@@ -22,11 +22,11 @@
 package com.deweyvm.gleany.data
 
 object Timer {
-  def timer[T](f:() => T):(T, Long) = {
+  def timer[T](f:() => T):(Long, T) = {
     val before = System.nanoTime
     val result = f()
     val after = System.nanoTime
-    (result, after - before)
+    (after - before, result)
   }
 
   def printMillis[T](f:() => T):T = {
@@ -34,7 +34,7 @@ object Timer {
   }
 
   def printMillisString[T](s:String, f:() => T):T = {
-    val (t, ns) = timer(f)
+    val (ns, t) = timer(f)
     println(s + ns/1000000L + " ms")
     t
   }
@@ -44,7 +44,7 @@ object Timer {
   }
 
   def printNanosString[T](s:String, f:() => T):T = {
-    val (t, ns) = timer(f)
+    val (ns, t) = timer(f)
     println(s + ns + " ns")
     t
   }

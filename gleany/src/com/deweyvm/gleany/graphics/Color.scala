@@ -34,6 +34,7 @@ object Color {
   val Tan: Color = Color(210/256f, 180/256f, 140/256f)
   val Pink: Color = Color(1, 0.68f, 0.68f)
   val Brown: Color = Color(0.58f, 0.29f, 0f)
+  val GrossGreen: Color = Color(0.58f/5, 0.99f/5, 0f)
   val Black: Color = Color(0, 0, 0)
   val Blank: Color = Color(0, 0, 0, 0)
   val Grey: Color = Color(0.7f, 0.7f, 0.7f)

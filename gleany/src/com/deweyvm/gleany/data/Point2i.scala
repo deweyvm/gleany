@@ -47,7 +47,7 @@ case class Point2i(x: Int, y: Int) {
 
   def /(scale: Int): Point2i = Point2i(x/scale, y/scale)
 
-  def toPoint2f: Point2f = new Point2f(x, y)
+  def toPoint2d: Point2d = new Point2d(x, y)
 
   def toTuple: (Int, Int) = (x, y)
 

@@ -22,13 +22,18 @@
 package com.deweyvm.gleany.audio
 
 import com.badlogic.gdx.audio
+import com.badlogic.gdx.utils.GdxRuntimeException
 
 class Music(manager: AudioManager, music: audio.Music) extends AudioInstance(manager) {
   private var adjVolume = 1f
 
   override def play() {
-    manager += this
-    music.play()
+    try {
+      manager += this
+      music.play()
+    } catch {
+      case rte:GdxRuntimeException => ()
+    }
   }
 
   override def isPlaying: Boolean = music.isPlaying

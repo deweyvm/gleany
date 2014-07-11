@@ -21,8 +21,6 @@
 
 package com.deweyvm.gleany.saving;
 
-import com.deweyvm.gleany.data.Point2i;
-
 import java.util.Map;
 
 public class RawSettings {
@@ -38,7 +36,8 @@ public class RawSettings {
 
     public static RawSettings makeNew(Map<String, Float> keyboardDefault,
                                       Map<String, String> joypadDefault,
-                                      Point2i windowSize,
+                                      int windowSizex,
+                                      int windowSizey,
                                       int displayType,
                                       float musicVolume,
                                       float sfxVolume) {
@@ -47,8 +46,8 @@ public class RawSettings {
         result.joypadControls = joypadDefault;
         result.sfxVolume = sfxVolume;
         result.musicVolume = musicVolume;
-        result.width = windowSize.x();
-        result.height = windowSize.y();
+        result.width = windowSizex;
+        result.height = windowSizey;
         result.displayType = displayType;
         return result;
     }

@@ -41,7 +41,8 @@ class SettingUtils(controls: ControlNameCollection[ControlName], defaults: Setti
   def makeNew: RawSettings = {
     RawSettings.makeNew(scalaMapToJava(controls.makeKeyboardDefault),
       scalaMapToJava(controls.makeJoypadDefault),
-      defaults.WindowSize,
+      defaults.WindowSize.x,
+      defaults.WindowSize.y,
       defaults.DisplayMode,
       defaults.MusicVolume,
       defaults.SfxVolume)

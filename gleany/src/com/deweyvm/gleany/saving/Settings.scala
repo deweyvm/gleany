@@ -28,7 +28,7 @@ import com.deweyvm.gleany.graphics.display.DisplayType
 import scala.collection.mutable.ArrayBuffer
 
 
-class Settings(controls: ControlNameCollection[ControlName], defaults: SettingDefaults) extends VideoSettings with AudioSettings {
+class Settings(controls: ControlNameCollection[ControlName], defaults: SettingDefaults, persist:Boolean) extends VideoSettings with AudioSettings {
   import SettingUtils.scalaMapToJava
 
   Debug.load()
@@ -36,7 +36,13 @@ class Settings(controls: ControlNameCollection[ControlName], defaults: SettingDe
   //fixme -- private these?
   val utils = new SettingUtils(controls, defaults)
   val filename = "settings.json"
-  val raw: RawSettings = LoadUtils.load(classOf[RawSettings], filename, () => utils.makeNew, utils.verify)
+  val raw: RawSettings = {
+    if (persist) {
+      LoadUtils.load(classOf[RawSettings], filename, () => utils.makeNew, utils.verify)
+    } else {
+      utils.makeNew
+    }
+  }
 
   def addListener(listener: () => Unit) {
     controlListeners += listener
@@ -91,6 +97,9 @@ class Settings(controls: ControlNameCollection[ControlName], defaults: SettingDe
 
   def flush() {
     //fixme -- flush should verify first
-    LoadUtils.flush(raw, filename)
+    if (persist) {
+      LoadUtils.flush(raw, filename)
+
+    }
   }
 }

@@ -81,5 +81,10 @@ case class Color(r: Double, g: Double, b: Double, a: Double = 1) {
   def toByteTuple:(Int,Int,Int) = ((r*256).toInt,(g*256).toInt,(b*256).toInt)
 
   def dim(factor: Double): Color = Color(r / factor, g / factor, b / factor)
+  def mix(other:Color, amt:Double) =
+    Color(r*(1-amt) + other.r*amt,
+          g*(1-amt) + other.g*amt,
+          b*(1-amt) + other.b*amt
+    )
   def brighten(factor: Double): Color = Color(r+factor, g+factor, b+factor)
 }

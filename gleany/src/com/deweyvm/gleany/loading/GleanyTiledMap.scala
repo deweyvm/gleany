@@ -128,15 +128,20 @@ class GleanyTiledMap(mapName: String) extends ITiledMap {
     pairs.toMap
   }
 
-  private def makeProperties = {
+  private def makeProperties: Map[String, String] = {
     val propertyElement = root.getChildByName("properties")
-    val pairs = 0 until propertyElement.getChildCount map { j: Int =>
-        val prop = propertyElement.getChild(j)
-        val key = prop.get("name")
-        val value = prop.get("value")
-        (key, value)
+    if (propertyElement == null) {
+      Map()
+    } else {
+      val pairs = 0 until propertyElement.getChildCount map {
+        j: Int =>
+          val prop = propertyElement.getChild(j)
+          val key = prop.get("name")
+          val value = prop.get("value")
+          (key, value)
+      }
+      pairs.toMap
     }
-    pairs.toMap
   }
 
   private def parseCsv(firstGid: Int, data: String, width: Int, height: Int): Array[Array[Int]] = {

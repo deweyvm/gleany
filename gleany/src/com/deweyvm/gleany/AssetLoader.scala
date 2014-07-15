@@ -27,6 +27,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.Gdx
 import com.deweyvm.gleany.data.Recti
 import com.deweyvm.gleany.audio.{Music, Sfx}
+import com.deweyvm.gleany.loading.GleanyTiledMap
 
 object AssetLoader {
   def loadTexture(name: String): Texture = new Texture(Glean.y.files.texture(name))
@@ -54,6 +55,10 @@ object AssetLoader {
   def loadMusic(name: String): Music = {
     val music = Gdx.audio.newMusic(Glean.y.files.music(name))
     new Music(Glean.y.audio, music)
+  }
+
+  def loadTmx(name: String): GleanyTiledMap = {
+    new GleanyTiledMap(name)
   }
 
 }

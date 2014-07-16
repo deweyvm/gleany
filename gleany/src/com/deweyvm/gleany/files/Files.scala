@@ -51,6 +51,8 @@ class Files(resolver: PathResolver) {
 
   def texture(name: String): FileHandle = getFile(resolver.TexturePath + "/" + name + ".png")
 
+  def data(name: String): FileHandle = getFile(resolver.DataPath + "/" + name)
+
   private def findSound(name: String, root: String): FileHandle = {
     val pathList = List("ogg", "wav") map {
       ext =>

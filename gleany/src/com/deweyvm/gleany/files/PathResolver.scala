@@ -26,6 +26,6 @@ class PathResolver(
     val TexturePath: String,
     val SfxPath: String,
     val MusicPath: String,
-
+    val DataPath: String,
     val ShaderPath: String,
     val MapPath: String)

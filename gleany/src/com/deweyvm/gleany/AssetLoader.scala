@@ -47,9 +47,9 @@ object AssetLoader {
     font
   }
 
-  def loadSound(name: String, looped: Boolean): Sfx = {
-    val sound = Gdx.audio.newMusic(Glean.y.files.sfx(name))
-    new Sfx(Glean.y.audio, sound, looped)
+  def loadSound(name: String): Sfx = {
+    val sound = Gdx.audio.newSound(Glean.y.files.sfx(name))
+    new Sfx(Glean.y.audio, sound)
   }
 
   def loadMusic(name: String): Music = {

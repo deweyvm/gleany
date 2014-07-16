@@ -28,12 +28,9 @@ class Music(manager: AudioManager, music: audio.Music) extends AudioInstance(man
   private var adjVolume = 1f
 
   override def play() {
-    try {
-      manager += this
-      music.play()
-    } catch {
-      case rte:GdxRuntimeException => ()
-    }
+    manager += this
+    music.play()
+
   }
 
   override def isPlaying: Boolean = music.isPlaying

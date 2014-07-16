@@ -23,13 +23,13 @@ package com.deweyvm.gleany.audio
 
 import com.badlogic.gdx.audio
 
-class Sfx(manager: AudioManager, sound: audio.Music, looped: Boolean) extends AudioInstance(manager) {
+class Sfx(manager: AudioManager, sound: audio.Sound) extends AudioInstance(manager) {
   private var adjVolume = 1f
-
+  private var id:Option[Long] = None
   override def play() {
-    manager += this
-    sound.setLooping(looped)
-    sound.play()
+    stop()
+    //manager += this
+    id = Some(sound.play())
   }
 
   def setAdjustVolume(adjVol: Float) {
@@ -37,23 +37,25 @@ class Sfx(manager: AudioManager, sound: audio.Music, looped: Boolean) extends Au
     setVolume(manager.settings.getSfxVolume)
   }
 
-  override def isPlaying: Boolean = sound.isPlaying
+  override def isPlaying: Boolean = ???
 
 
   override def setVolume(newVolume: Float) {
-    sound.setVolume(newVolume * adjVolume)
+    id foreach { i => sound.setVolume(i, newVolume * adjVolume) }
   }
 
   override def pause() {
-    sound.pause()
+    id foreach { i => sound.pause(i) }
   }
 
   override def stop() {
-    sound.stop()
+    id.foreach { i => sound.stop(i) }
   }
 
   override def resume() {
-    sound.play()
+
+    id.foreach { i => sound.resume(i) }
+
   }
 
   setVolume(manager.settings.getSfxVolume)

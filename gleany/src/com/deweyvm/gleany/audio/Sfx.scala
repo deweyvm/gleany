@@ -27,9 +27,9 @@ class Sfx(manager: AudioManager, sound: audio.Sound) extends AudioInstance(manag
   private var adjVolume = 1f
   private var id:Option[Long] = None
   override def play() {
-    stop()
+    //stop()
     //manager += this
-    id = Some(sound.play())
+    id = Some(sound.play(adjVolume))
   }
 
   def setAdjustVolume(adjVol: Float) {

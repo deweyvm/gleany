@@ -54,7 +54,7 @@ class Files(resolver: PathResolver) {
   def data(name: String): FileHandle = getFile(resolver.DataPath + "/" + name)
 
   private def findSound(name: String, root: String): FileHandle = {
-    val pathList = List("ogg", "wav") map {
+    val pathList = List("ogg", "wav", "mp3") map {
       ext =>
         val path = root + "/" + name + "." + ext
         if (exists(path)) {

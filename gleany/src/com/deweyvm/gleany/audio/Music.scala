@@ -22,7 +22,6 @@
 package com.deweyvm.gleany.audio
 
 import com.badlogic.gdx.audio
-import com.badlogic.gdx.utils.GdxRuntimeException
 
 class Music(manager: AudioManager, music: audio.Music) extends AudioInstance(manager) {
   private var adjVolume = 1f
@@ -44,7 +43,9 @@ class Music(manager: AudioManager, music: audio.Music) extends AudioInstance(man
     music.setVolume(newVolume * adjVolume)
   }
 
-  override def stop() {}
+  override def stop() {
+    music.stop()
+  }
 
   override def pause() {
     music.pause()

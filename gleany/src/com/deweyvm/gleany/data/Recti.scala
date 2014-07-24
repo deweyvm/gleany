@@ -57,6 +57,8 @@ case class Recti(x: Int, y: Int, width: Int, height: Int) {
   def +(other: Recti): Recti =
     Recti(x + other.x, y + other.y, width + other.width, height + other.height)
 
+  def area = width*height
+
   def toRectf: Rectf = Rectf(x, y, width, height)
   def toRectd: Rectd = Rectd(x, y, width, height)
 

@@ -23,7 +23,7 @@ package com.deweyvm.gleany.logging
 
 
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.GL10
+import com.badlogic.gdx.graphics.GL20
 
 class HardwareInfo {
   val os: OS = getOS
@@ -40,8 +40,8 @@ class HardwareInfo {
   }
 
   private def getGpuInfo: String = {
-    val gpu: String = Gdx.gl.glGetString(GL10.GL_RENDERER)
-    val glVersion: String = Gdx.gl.glGetString(GL10.GL_VERSION)
+    val gpu: String = Gdx.gl.glGetString(GL20.GL_RENDERER)
+    val glVersion: String = Gdx.gl.glGetString(GL20.GL_VERSION)
     gpu + ", GL version " + glVersion
   }
 

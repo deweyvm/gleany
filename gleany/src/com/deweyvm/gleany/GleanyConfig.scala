@@ -49,7 +49,6 @@ case class GleanyConfig(
     val config = new LwjglApplicationConfiguration
     config.title = title
     config.vSyncEnabled = true
-    config.useGL20 = true
     iconPath foreach {
       path =>
         config.addIcon(path, Files.FileType.Internal)

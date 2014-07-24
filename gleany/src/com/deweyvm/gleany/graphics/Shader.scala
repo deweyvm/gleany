@@ -24,7 +24,7 @@ package com.deweyvm.gleany.graphics
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.math.Matrix4
 import com.deweyvm.gleany.{Glean, Debug}
-import com.badlogic.gdx.graphics.{GL20, Texture, GL10, Mesh}
+import com.badlogic.gdx.graphics.{GL20, Texture, Mesh}
 import com.badlogic.gdx.Gdx
 
 object Shader {
@@ -108,7 +108,7 @@ class Shader(vert: String, frag: String) {
   def draw(func: () => Unit) {
     begin()
     func()
-    mesh.render(shader, GL10.GL_TRIANGLE_FAN)
+    mesh.render(shader, GL20.GL_TRIANGLE_FAN)
     end()
   }
 
@@ -117,7 +117,7 @@ class Shader(vert: String, frag: String) {
     binds foreach { case (texture, index) =>
       texture.bind(index)
     }
-    mesh.render(shader, GL10.GL_TRIANGLE_FAN)
+    mesh.render(shader, GL20.GL_TRIANGLE_FAN)
     end()
     if (binds.length > 0) {
       Shader.cleanupTextures(binds.length)

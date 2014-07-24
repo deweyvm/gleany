@@ -42,6 +42,10 @@ case class Recti(x: Int, y: Int, width: Int, height: Int) {
     !(pt._1 < x || pt._1 > right || pt._2 < y || pt._2 > bottom)
   }
 
+  def containsRect(r:Recti) = {
+    x <= r.x && y <= r.y && right >= r.right && bottom >= r.bottom
+  }
+
   def intersects(other: Recti): Boolean = {
     val left = scala.math.max(x, other.x)
     val top = scala.math.max(y, other.y)

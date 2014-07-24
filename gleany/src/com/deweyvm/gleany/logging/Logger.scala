@@ -37,7 +37,7 @@ object Logger {
     })
   }
 
-  private def writeCrashToFile(root:String, e:Throwable) {
+  def writeCrashToFile(root:String, e:Throwable) {
     try {
       val filename: String = String.format("crash_%s", Time.getString)
       val file: File = new File(root + "/" + filename)

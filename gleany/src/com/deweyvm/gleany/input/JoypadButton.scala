@@ -53,6 +53,8 @@ object JoypadButton {
   val All: Iterable[JoypadButton] = Map map {
     case (name, info) => new JoypadButton(name, info)
   }
+
+  def apply(s:String) = new JoypadButton(s, Map(s))
 }
 
 case class JoypadButton(descriptor: String, info: ButtonSpec) {

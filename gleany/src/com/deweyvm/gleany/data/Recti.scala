@@ -54,6 +54,15 @@ case class Recti(x: Int, y: Int, width: Int, height: Int) {
     (left < right) && (top < bottom)
   }
 
+  def getOverlap(other:Recti):Option[Recti] = {
+    if (!other.intersects(this)) return None
+    val x = math.max(this.x, other.x)
+    val y = math.max(this.y, other.y)
+    val width = math.min(this.x + this.width, other.x + other.width) - x
+    val height = math.min(this.y + this.height, other.y + other.height) - y
+    Some(Recti(x, y, width, height))
+  }
+
   def +(other: Recti): Recti =
     Recti(x + other.x, y + other.y, width + other.width, height + other.height)
 

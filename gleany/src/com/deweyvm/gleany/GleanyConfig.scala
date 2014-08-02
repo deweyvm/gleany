@@ -31,7 +31,7 @@ import com.deweyvm.gleany.data.Point2i
 case class GleanyConfig(
     settings: VideoSettings with AudioSettings,
     title: String = "GleanyGame",
-    iconPath: Option[String] = None) {
+    iconPath: Seq[String] = Seq()) {
   def toLwjgl: LwjglApplicationConfiguration = lwjglConfig
 
   def getScreenSize:Point2i = {

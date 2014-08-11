@@ -23,6 +23,6 @@ package com.deweyvm.gleany.input.triggers
 
 import com.badlogic.gdx.Gdx
 
-class MouseTrigger extends Trigger {
-  override def isPressed: Boolean = Gdx.input.isTouched
+class MouseTrigger(val button: Int) extends Trigger {
+  override def isPressed: Boolean = Gdx.input.isButtonPressed(button)
 }

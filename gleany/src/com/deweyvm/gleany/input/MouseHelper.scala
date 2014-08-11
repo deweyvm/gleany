@@ -10,7 +10,6 @@ class MouseWrapper {
   var delta = 0
   val listener = new InputAdapter {
     override def scrolled(p1: Int): Boolean = {
-      println(p1)
       delta = p1
       false
     }
